@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
+<head>
 <link rel="apple-touch-icon" href="IMG_7450.jpeg">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -9,6 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="My Schedule">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#041E42">
+<link rel="apple-touch-icon" href="icon.png">
 <title>My PSU Schedule</title>
 <style>
   :root {
@@ -16,7 +17,6 @@
     --psu-navy-dark: #020f22;
     --psu-blue-light: #1e3a5f;
     --psu-white: #ffffff;
-    --psu-grey: #96A9AB;
     --accent-gold: #d9a441;
     --green: #4a7a5e;
     --bg: #eef1f4;
@@ -24,202 +24,131 @@
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   body {
     font-family: -apple-system, "Helvetica Neue", Roboto, Arial, sans-serif;
-    background: var(--bg);
-    margin: 0;
-    padding: 0 0 40px 0;
-    color: #1a1a1a;
+    background: var(--bg); margin: 0; padding: 0 0 40px 0; color: #1a1a1a;
   }
+  @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes badgePop { from { transform: scale(0.5) rotate(-15deg); opacity: 0; } to { transform: scale(1) rotate(0); opacity: 1; } }
+  @keyframes livePulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.35; transform: scale(1.6); } }
+  @keyframes checkPop { 0% { transform: scale(0.85); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+  @keyframes stripeShift { from { background-position: 0 0; } to { background-position: -40px 0; } }
 
-  /* ---- Header ---- */
   #header {
     background: linear-gradient(135deg, var(--psu-navy) 0%, var(--psu-navy-dark) 100%);
-    color: white;
-    padding: 28px 20px 22px 20px;
-    position: relative;
-    overflow: hidden;
+    color: white; padding: 28px 20px 22px 20px; position: relative; overflow: hidden;
   }
   #header::after {
-    content: "";
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 6px;
+    content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 6px;
     background: repeating-linear-gradient(90deg, var(--accent-gold) 0 20px, var(--psu-white) 20px 40px);
-    opacity: 0.85;
+    opacity: 0.85; animation: stripeShift 6s linear infinite;
   }
-  .badge-row {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    position: relative;
-    z-index: 1;
-  }
+  .badge-row { display: flex; align-items: center; gap: 14px; position: relative; z-index: 1; }
   .psu-badge {
-    width: 54px; height: 54px;
-    border-radius: 50%;
-    background: var(--psu-white);
-    color: var(--psu-navy);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 1.1em;
-    letter-spacing: -1px;
-    border: 3px solid var(--accent-gold);
-    flex-shrink: 0;
+    width: 54px; height: 54px; border-radius: 50%; background: var(--psu-white); color: var(--psu-navy);
+    display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1em;
+    letter-spacing: -1px; border: 3px solid var(--accent-gold); flex-shrink: 0;
+    animation: badgePop 0.5s cubic-bezier(.34,1.56,.64,1) both;
   }
-  #header h1 {
-    margin: 0;
-    font-size: 1.4em;
-    letter-spacing: 0.5px;
-  }
-  #header .subtitle {
-    margin: 2px 0 0 0;
-    font-size: 0.85em;
-    color: #b9c4d4;
-  }
-
+  #header h1 { margin: 0; font-size: 1.4em; letter-spacing: 0.5px; }
+  #header .subtitle { margin: 2px 0 0 0; font-size: 0.85em; color: #b9c4d4; }
   #content { padding: 18px 16px 0 16px; }
 
-  /* ---- Now Banner ---- */
   #now-banner {
-    background: var(--psu-white);
-    border: 2px solid var(--psu-navy);
-    border-radius: 14px;
-    padding: 16px 18px;
-    margin-bottom: 22px;
-    box-shadow: 0 2px 8px rgba(4,30,66,0.12);
+    background: var(--psu-white); border: 2px solid var(--psu-navy); border-radius: 14px;
+    padding: 16px 18px; margin-bottom: 22px; box-shadow: 0 2px 8px rgba(4,30,66,0.12);
+    animation: fadeSlideUp 0.4s ease-out both; cursor: pointer;
   }
   #now-banner .tag {
-    display: inline-block;
-    background: var(--psu-navy);
-    color: white;
-    font-size: 0.7em;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    padding: 3px 10px;
-    border-radius: 20px;
-    margin-bottom: 8px;
+    display: inline-flex; align-items: center; gap: 5px; background: var(--psu-navy); color: white;
+    font-size: 0.7em; font-weight: 700; letter-spacing: 0.5px; padding: 3px 10px; border-radius: 20px; margin-bottom: 8px;
   }
-  #now-banner .main-line {
-    font-size: 1.05em;
-    font-weight: 700;
-    color: var(--psu-navy);
-  }
+  #now-banner .tag .dot { width: 7px; height: 7px; border-radius: 50%; background: #ff6b6b; animation: livePulse 1.3s infinite ease-in-out; }
+  #now-banner .main-line { font-size: 1.05em; font-weight: 700; color: var(--psu-navy); }
   #now-banner .small { font-size: 0.85em; color: #a9761a; margin-top: 6px; font-weight: 600; }
+  #now-banner .hint { font-size: 0.75em; color: #99a; margin-top: 8px; }
 
-  /* ---- Day blocks ---- */
   .day-block {
-    background: white;
-    border-radius: 14px;
-    margin-bottom: 14px;
-    padding: 14px 16px 16px 16px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    background: white; border-radius: 14px; margin-bottom: 14px; padding: 14px 16px 16px 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08); animation: fadeSlideUp 0.45s ease-out both;
   }
-  .day-title {
-    font-weight: 800;
-    color: var(--psu-navy);
-    margin-bottom: 10px;
-    font-size: 1.05em;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .day-title::before {
-    content: "🐾";
-    font-size: 0.9em;
-  }
+  .day-block:nth-child(1) { animation-delay: 0.03s; } .day-block:nth-child(2) { animation-delay: 0.08s; }
+  .day-block:nth-child(3) { animation-delay: 0.13s; } .day-block:nth-child(4) { animation-delay: 0.18s; }
+  .day-block:nth-child(5) { animation-delay: 0.23s; } .day-block:nth-child(6) { animation-delay: 0.28s; }
+  .day-block:nth-child(7) { animation-delay: 0.33s; }
+  .day-title { font-weight: 800; color: var(--psu-navy); margin-bottom: 10px; font-size: 1.05em; display: flex; align-items: center; gap: 6px; }
+  .day-title::before { content: "🐾"; font-size: 0.9em; }
   .class-card {
-    background: #f4f6f8;
-    border-left: 5px solid var(--green);
-    border-radius: 10px;
-    padding: 12px 14px;
-    margin-bottom: 10px;
-    position: relative;
+    background: #f4f6f8; border-left: 5px solid var(--green); border-radius: 10px; padding: 12px 14px;
+    margin-bottom: 10px; position: relative; animation: fadeIn 0.35s ease both;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.25s ease; cursor: pointer;
   }
+  .class-card:active { transform: scale(0.97); }
   .class-card.waitlist { border-left-color: var(--accent-gold); background: #fbf4e4; }
   .class-card.club { border-left-color: var(--psu-blue-light); background: #e9eef7; }
   .class-name { font-weight: 700; color: #14213d; font-size: 1em; }
   .class-meta { font-size: 0.85em; color: #555; margin-top: 3px; line-height: 1.4; }
+  .tap-hint { font-size: 0.75em; color: #99a; margin-top: 6px; }
   .directions-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    margin-top: 8px;
-    font-size: 0.8em;
-    font-weight: 600;
-    color: white;
-    background: var(--psu-navy);
-    padding: 6px 12px;
-    border-radius: 20px;
-    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 4px; margin-top: 8px; font-size: 0.8em; font-weight: 600;
+    color: white; background: var(--psu-navy); padding: 6px 12px; border-radius: 20px; text-decoration: none;
+    transition: transform 0.15s ease, opacity 0.15s ease;
   }
-  .directions-link:active { opacity: 0.75; }
+  .directions-link:active { transform: scale(0.93); opacity: 0.8; }
   .empty-day { color: #aaa; font-style: italic; font-size: 0.88em; }
-  .remove-btn {
-    color: #b00020;
-    cursor: pointer;
-    font-size: 0.78em;
-    background: none;
-    border: none;
-    margin-top: 6px;
-    font-weight: 600;
-    padding: 0;
-  }
+  .remove-btn { color: #b00020; cursor: pointer; font-size: 0.78em; background: none; border: none; margin-top: 6px; font-weight: 600; padding: 0; }
+  .remove-btn:active { opacity: 0.5; }
 
-  /* ---- Add form ---- */
   #add-form {
-    background: white;
-    border-radius: 14px;
-    padding: 18px;
-    margin-top: 26px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-    border-top: 4px solid var(--accent-gold);
+    background: white; border-radius: 14px; padding: 18px; margin-top: 26px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-top: 4px solid var(--accent-gold);
+    animation: fadeSlideUp 0.45s ease-out 0.38s both;
   }
-  #add-form h2 {
-    margin-top: 0;
-    color: var(--psu-navy);
-    font-size: 1.05em;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
+  #add-form h2 { margin-top: 0; color: var(--psu-navy); font-size: 1.05em; display: flex; align-items: center; gap: 6px; }
   #add-form label { display: block; margin-top: 12px; font-size: 0.85em; font-weight: 700; color: #333; }
   #add-form input[type=text], #add-form input[type=time] {
-    width: 100%; padding: 10px; margin-top: 5px; border: 1.5px solid #d5d9de; border-radius: 8px;
-    font-size: 0.95em;
-    background: #fafbfc;
+    width: 100%; padding: 10px; margin-top: 5px; border: 1.5px solid #d5d9de; border-radius: 8px; font-size: 0.95em; background: #fafbfc;
   }
   #add-form input:focus { outline: none; border-color: var(--psu-navy); }
   .day-checks { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-  .day-checks label {
-    display: flex; align-items: center; gap: 4px;
-    font-weight: 500; font-size: 0.85em;
-    background: #f0f2f4;
-    padding: 6px 10px;
-    border-radius: 8px;
-    margin-top: 0;
-  }
+  .day-checks label { display: flex; align-items: center; gap: 4px; font-weight: 500; font-size: 0.85em; background: #f0f2f4; padding: 6px 10px; border-radius: 8px; margin-top: 0; }
   #add-form button {
-    width: 100%;
-    margin-top: 16px;
-    background: var(--psu-navy);
-    color: white;
-    border: none;
-    padding: 13px 18px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: 700;
-    letter-spacing: 0.3px;
+    width: 100%; margin-top: 16px; background: var(--psu-navy); color: white; border: none; padding: 13px 18px;
+    border-radius: 10px; cursor: pointer; font-size: 1em; font-weight: 700; letter-spacing: 0.3px;
+    transition: transform 0.15s ease, background 0.25s ease;
   }
-  #add-form button:active { opacity: 0.85; }
+  #add-form button:active { transform: scale(0.97); }
+  #add-form button.success-flash { background: var(--green); animation: checkPop 0.35s ease; }
 
-  footer {
-    text-align: center;
-    font-size: 0.75em;
-    color: #99a;
-    margin-top: 26px;
-    padding: 0 16px;
+  footer { text-align: center; font-size: 0.75em; color: #99a; margin-top: 26px; padding: 0 16px; animation: fadeIn 0.6s ease 0.5s both; }
+
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(4,30,66,0.55);
+    display: flex; align-items: flex-end; justify-content: center; z-index: 1000;
+    opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
+  }
+  .modal-overlay.active { opacity: 1; pointer-events: auto; }
+  .modal-box {
+    background: white; width: 100%; max-width: 480px; border-radius: 20px 20px 0 0;
+    padding: 22px 20px 28px 20px; max-height: 85vh; overflow-y: auto;
+    transform: translateY(30px); transition: transform 0.25s ease; position: relative;
+    box-shadow: 0 -4px 24px rgba(0,0,0,0.25);
+  }
+  .modal-overlay.active .modal-box { transform: translateY(0); }
+  .modal-close {
+    position: absolute; top: 14px; right: 14px; background: #f0f2f4; border: none; border-radius: 50%;
+    width: 32px; height: 32px; font-size: 1em; cursor: pointer; color: #555;
+  }
+  .modal-title { font-size: 1.15em; font-weight: 800; color: var(--psu-navy); margin: 4px 30px 2px 0; }
+  .modal-meta { font-size: 0.88em; color: #555; margin-bottom: 12px; line-height: 1.4; }
+  .modal-section-label { font-size: 0.78em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; color: var(--psu-navy); margin-top: 16px; margin-bottom: 6px; }
+  .modal-description { font-size: 0.92em; color: #333; line-height: 1.5; background: #f4f6f8; padding: 10px 12px; border-radius: 10px; }
+  .modal-input, .modal-textarea { width: 100%; padding: 10px; border: 1.5px solid #d5d9de; border-radius: 8px; font-size: 0.92em; background: #fafbfc; font-family: inherit; }
+  .modal-textarea { min-height: 64px; resize: vertical; }
+  .modal-save-btn { width: 100%; margin-top: 16px; background: var(--psu-navy); color: white; border: none; padding: 12px; border-radius: 10px; font-weight: 700; font-size: 0.95em; cursor: pointer; }
+  .modal-save-btn.saved { background: var(--green); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
   }
 </style>
 </head>
@@ -236,7 +165,7 @@
 </div>
 
 <div id="content">
-  <div id="now-banner"></div>
+  <div id="now-banner" onclick="openBannerModal()"></div>
   <div id="week-container"></div>
 
   <div id="add-form">
@@ -265,20 +194,38 @@
   <footer>Made for Penn State University Park · We Are!</footer>
 </div>
 
+<div class="modal-overlay" id="classModal" onclick="closeModalOnOverlay(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
 <script>
 const DAYS = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
 
 const classes = [
-  { name: "RUS 1 - 002", type: "Lecture", days: ["Mon","Fri"], start: "10:10", end: "11:00", building: "Ag Science & Industries Building", room: "110" },
-  { name: "RUS 1 - 002L", type: "Discussion", days: ["Tue","Thu"], start: "10:35", end: "11:25", building: "Ferguson Building", room: "202" },
-  { name: "PSU 9 - 021", type: "Lecture", days: ["Mon"], start: "11:15", end: "12:30", building: "Willard Building", room: "002" },
-  { name: "HDFS 229 - 002", type: "Lecture", days: ["Tue","Thu"], start: "12:05", end: "13:20", building: "Thomas Building", room: "102" },
-  { name: "ENGL 30H - 001", type: "Lecture (WAITLISTED)", days: ["Mon","Wed","Fri"], start: "13:25", end: "14:15", building: "Thomas Building", room: "119", waitlist: true },
-  { name: "COMM 271 - 001", type: "Lecture", days: ["Tue","Thu"], start: "13:35", end: "14:50", building: "Sparks Building", room: "010" }
+  { id: "span10-lec", name: "SPAN 10 - 002", type: "Lecture", days: ["Mon","Wed"], start: "10:10", end: "11:00", building: "Electrical Engineering West Building", room: "105",
+    description: "Builds basic Spanish grammar, listening, speaking, and writing skills — roughly equivalent to completing SPAN 1 and half of SPAN 2." },
+  { id: "span10-disc", name: "SPAN 10 - 002L", type: "Discussion", days: ["Tue","Thu"], start: "10:35", end: "11:50", building: "Huck Life Sciences Building", room: "014",
+    description: "Discussion section paired with the SPAN 10 lecture, focused on spoken practice and reinforcing that week's grammar." },
+  { id: "psu9-021", name: "PSU 9 - 021", type: "First-Year Seminar", days: ["Mon"], start: "11:15", end: "12:30", building: "Willard Building", room: "002",
+    description: "A one-credit seminar for Communications students designed to ease the transition to college — covering academic expectations, workload, and campus resources." },
+  { id: "hdfs229-002", name: "HDFS 229 - 002", type: "Lecture", days: ["Tue","Thu"], start: "12:05", end: "13:20", building: "Thomas Building", room: "102",
+    description: "Studies child development from before birth through pre-adolescence — social, emotional, cognitive, and physical growth, and how family and community shape it." },
+  { id: "engl30h-001", name: "ENGL 30H - 001", type: "Honors Lecture (WAITLISTED)", days: ["Mon","Wed","Fri"], start: "13:25", end: "14:15", building: "Thomas Building", room: "119", waitlist: true,
+    description: "Honors-level rhetoric and composition focused on analyzing and producing texts through rhetorical principles, with extra rigor like longer papers and a research component." },
+  { id: "comm271-001", name: "COMM 271 - 001", type: "Lecture", days: ["Tue","Thu"], start: "13:35", end: "14:50", building: "Sparks Building", room: "010",
+    description: "Introduces how journalists use multimedia tools — text, video, audio, social — and covers cross-platform storytelling, data visualization, and digital ethics." }
 ];
+
+let allItems = [];
+let currentBannerItemId = null;
 
 function loadClubs() { return JSON.parse(localStorage.getItem("clubs") || "[]"); }
 function saveClubs(clubs) { localStorage.setItem("clubs", JSON.stringify(clubs)); }
+function loadClassDetails() { return JSON.parse(localStorage.getItem("classDetails") || "{}"); }
+function saveClassDetailsStore(obj) { localStorage.setItem("classDetails", JSON.stringify(obj)); }
 function toMinutes(t) { const [h,m] = t.split(":").map(Number); return h*60+m; }
 function directionsUrl(building) {
   const query = encodeURIComponent(building + ", Penn State University Park, PA");
@@ -293,12 +240,12 @@ function formatTime(t) {
 
 function renderWeek() {
   const clubs = loadClubs().map(c => ({...c, isClub: true}));
-  const all = [...classes, ...clubs];
+  allItems = [...classes, ...clubs];
   const container = document.getElementById("week-container");
   container.innerHTML = "";
 
   DAYS.forEach(day => {
-    const dayEvents = all
+    const dayEvents = allItems
       .filter(e => e.days.includes(day))
       .sort((a,b) => toMinutes(a.start) - toMinutes(b.start));
 
@@ -312,11 +259,12 @@ function renderWeek() {
       dayEvents.forEach(e => {
         const cardClass = e.isClub ? "club" : (e.waitlist ? "waitlist" : "");
         html += `
-          <div class="class-card ${cardClass}">
+          <div class="class-card ${cardClass}" onclick="openModal('${e.id}')">
             <div class="class-name">${e.name}${e.waitlist ? " ⚠️ Waitlisted" : ""}${e.isClub ? " · Club" : ""}</div>
             <div class="class-meta">${e.type ? e.type + " · " : ""}${formatTime(e.start)}–${formatTime(e.end)} · ${e.building}${e.room ? " " + e.room : ""}</div>
-            <a class="directions-link" target="_blank" href="${directionsUrl(e.building)}">📍 Directions</a>
-            ${e.isClub ? `<div><button class="remove-btn" onclick="removeClub('${e.name.replace(/'/g,"\\'")}')">✕ Remove</button></div>` : ""}
+            <a class="directions-link" target="_blank" href="${directionsUrl(e.building)}" onclick="event.stopPropagation()">📍 Directions</a>
+            <div class="tap-hint">Tap for details ›</div>
+            ${e.isClub ? `<div><button class="remove-btn" onclick="event.stopPropagation(); removeClub('${e.id}')">✕ Remove</button></div>` : ""}
           </div>`;
       });
     }
@@ -329,29 +277,77 @@ function renderNowBanner() {
   const now = new Date();
   const dayName = DAYS[(now.getDay() + 6) % 7];
   const nowMin = now.getHours()*60 + now.getMinutes();
-  const clubs = loadClubs().map(c => ({...c, isClub: true}));
-  const all = [...classes, ...clubs];
-
-  const todayEvents = all
+  const todayEvents = allItems
     .filter(e => e.days.includes(dayName))
     .sort((a,b) => toMinutes(a.start) - toMinutes(b.start));
 
   const current = todayEvents.find(e => nowMin >= toMinutes(e.start) && nowMin < toMinutes(e.end));
   const next = todayEvents.find(e => toMinutes(e.start) > nowMin);
-
   const banner = document.getElementById("now-banner");
+
   if (current) {
-    banner.innerHTML = `<span class="tag">RIGHT NOW</span>
+    currentBannerItemId = current.id;
+    banner.innerHTML = `<span class="tag"><span class="dot"></span>RIGHT NOW</span>
       <div class="main-line">${current.name} · until ${formatTime(current.end)}</div>
       <div class="class-meta">${current.building}${current.room ? " " + current.room : ""}</div>
-      ${current.waitlist ? `<div class="small">⚠️ Waitlisted — confirm you're enrolled</div>` : ""}`;
+      ${current.waitlist ? `<div class="small">⚠️ Waitlisted — confirm you're enrolled</div>` : ""}
+      <div class="hint">Tap for details ›</div>`;
   } else if (next) {
+    currentBannerItemId = next.id;
     banner.innerHTML = `<span class="tag">NEXT UP</span>
       <div class="main-line">${next.name} · ${formatTime(next.start)}</div>
-      <div class="class-meta">${next.building}${next.room ? " " + next.room : ""}</div>`;
+      <div class="class-meta">${next.building}${next.room ? " " + next.room : ""}</div>
+      <div class="hint">Tap for details ›</div>`;
   } else {
+    currentBannerItemId = null;
     banner.innerHTML = `<span class="tag">TODAY</span><div class="main-line">Nothing else scheduled 🎉</div>`;
   }
+}
+
+function openBannerModal() { if (currentBannerItemId) openModal(currentBannerItemId); }
+
+function openModal(id) {
+  const item = allItems.find(i => i.id === id);
+  if (!item) return;
+  const details = loadClassDetails()[id] || {};
+  const isClub = !!item.isClub;
+  const daysStr = item.days.join(", ");
+
+  let html = `
+    <div class="modal-title">${item.name}${item.waitlist ? " ⚠️" : ""}</div>
+    <div class="modal-meta">${item.type ? item.type + " · " : ""}${daysStr} · ${formatTime(item.start)}–${formatTime(item.end)}<br>${item.building}${item.room ? " " + item.room : ""}</div>
+    <a class="directions-link" target="_blank" href="${directionsUrl(item.building)}" onclick="event.stopPropagation()">📍 Directions</a>
+  `;
+  if (item.description) {
+    html += `<div class="modal-section-label">Description</div><div class="modal-description">${item.description}</div>`;
+  }
+  html += `
+    <div class="modal-section-label">${isClub ? "About / Notes" : "Personal Notes"}</div>
+    <textarea class="modal-textarea" id="modalNotes" placeholder="${isClub ? "What's this club about?" : "Anything you want to remember..."}">${details.notes || ""}</textarea>
+    <div class="modal-section-label">${isClub ? "Contact / Leader" : "Instructor"}</div>
+    <input class="modal-input" id="modalInstructor" type="text" placeholder="${isClub ? "e.g. club president's name" : "Add your professor's name"}" value="${details.instructor || ""}">
+    <div class="modal-section-label">${isClub ? "What to Bring" : "Resources Needed"}</div>
+    <textarea class="modal-textarea" id="modalResources" placeholder="${isClub ? "e.g. running shoes, dues" : "e.g. textbook, laptop, access code"}">${details.resources || ""}</textarea>
+    <button class="modal-save-btn" id="modalSaveBtn" onclick="saveModalDetails('${id}')">Save</button>
+  `;
+  document.getElementById("modalContent").innerHTML = html;
+  document.getElementById("classModal").classList.add("active");
+}
+
+function closeModal() { document.getElementById("classModal").classList.remove("active"); }
+function closeModalOnOverlay(event) { if (event.target.id === "classModal") closeModal(); }
+
+function saveModalDetails(id) {
+  const notes = document.getElementById("modalNotes").value;
+  const instructor = document.getElementById("modalInstructor").value;
+  const resources = document.getElementById("modalResources").value;
+  const all = loadClassDetails();
+  all[id] = { notes, instructor, resources };
+  saveClassDetailsStore(all);
+  const btn = document.getElementById("modalSaveBtn");
+  btn.textContent = "✓ Saved";
+  btn.classList.add("saved");
+  setTimeout(() => { btn.textContent = "Save"; btn.classList.remove("saved"); }, 1200);
 }
 
 function addClub() {
@@ -366,8 +362,9 @@ function addClub() {
     return;
   }
 
+  const id = "club-" + Date.now() + "-" + Math.random().toString(36).slice(2,7);
   const clubs = loadClubs();
-  clubs.push({ name, start, end, days, building: location, type: "Club/Activity" });
+  clubs.push({ id, name, start, end, days, building: location, type: "Club/Activity" });
   saveClubs(clubs);
 
   document.getElementById("clubName").value = "";
@@ -378,14 +375,29 @@ function addClub() {
 
   renderWeek();
   renderNowBanner();
+
+  const btn = document.querySelector("#add-form button");
+  const original = btn.textContent;
+  btn.textContent = "✓ Added!";
+  btn.classList.add("success-flash");
+  setTimeout(() => { btn.textContent = original; btn.classList.remove("success-flash"); }, 1300);
 }
 
-function removeClub(name) {
-  let clubs = loadClubs();
-  clubs = clubs.filter(c => c.name !== name);
-  saveClubs(clubs);
-  renderWeek();
-  renderNowBanner();
+function removeClub(id) {
+  const cards = document.querySelectorAll(".class-card.club");
+  cards.forEach(card => {
+    if (card.getAttribute("onclick") && card.getAttribute("onclick").includes(id)) {
+      card.style.opacity = "0";
+      card.style.transform = "translateX(-14px)";
+    }
+  });
+  setTimeout(() => {
+    let clubs = loadClubs();
+    clubs = clubs.filter(c => c.id !== id);
+    saveClubs(clubs);
+    renderWeek();
+    renderNowBanner();
+  }, 220);
 }
 
 renderWeek();
