@@ -48,6 +48,9 @@
   @keyframes checkPop { 0% { transform: scale(0.85); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
   @keyframes stripeShift { from { background-position: 0 0; } to { background-position: -40px 0; } }
 
+  .hard-reset-btn { position: fixed; bottom: 18px; right: 18px; z-index: 500; width: 50px; height: 50px; border-radius: 50%; border: none; background: var(--psu-navy); color: white; font-size: 1.3em; box-shadow: 0 3px 10px rgba(0,0,0,0.35); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .hard-reset-btn:active { transform: scale(0.9); }
+
   #header { background: linear-gradient(135deg, var(--psu-navy) 0%, var(--psu-navy-dark) 100%); color: white; padding: 28px 20px 22px 20px; position: relative; overflow: hidden; }
   #header::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 6px; background: repeating-linear-gradient(90deg, var(--accent-gold) 0 20px, var(--psu-white) 20px 40px); opacity: 0.85; animation: stripeShift 6s linear infinite; }
   .theme-toggle-btn { position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.15); border: none; border-radius: 50%; width: 38px; height: 38px; font-size: 1.1em; cursor: pointer; color: white; display: flex; align-items: center; justify-content: center; transition: background 0.2s ease, transform 0.2s ease; z-index: 2; }
@@ -70,6 +73,8 @@
   .spotify-artist-name { font-size: 0.75em; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .spotify-idle { display: flex; align-items: center; justify-content: space-between; font-size: 0.82em; color: var(--text-secondary); background: var(--surface); border-radius: 20px; padding: 8px 14px; border: 1px dashed var(--border-light); }
   .spotify-disconnect { background: none; border: none; color: var(--text-muted); font-size: 0.85em; cursor: pointer; padding: 4px 8px; flex-shrink: 0; }
+  .spotify-setup-hint { font-size: 0.72em; color: var(--text-muted); margin-top: 8px; line-height: 1.4; }
+  .redirect-uri-box { display: block; width: 100%; margin-top: 6px; padding: 8px 10px; background: var(--surface-alt); border: 1px dashed var(--border-light); border-radius: 8px; font-family: monospace; font-size: 0.76em; color: var(--text-main); box-sizing: border-box; }
 
   .home-row { display: flex; align-items: center; gap: 6px; font-size: 0.82em; color: var(--text-secondary); margin-bottom: 14px; flex-wrap: wrap; }
   .home-row b { color: var(--heading-color); }
@@ -180,6 +185,8 @@
 </head>
 <body>
 
+<button id="hardResetBtn" class="hard-reset-btn" onclick="hardReset()" aria-label="Reload to home">🏠</button>
+
 <div id="header">
   <button id="themeToggle" class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle dark mode">🌙</button>
   <div class="badge-row">
@@ -271,6 +278,11 @@ let allItems = [];
 let currentBannerItemId = null;
 let ocrWorker = null;
 let reviewCandidates = [];
+
+// ---------- hard reset ----------
+function hardReset() {
+  window.location.href = window.location.origin + window.location.pathname;
+}
 
 // ---------- theme ----------
 function applyTheme(theme) {
@@ -392,7 +404,7 @@ async function editHome() {
 }
 
 // ---------- Spotify ----------
-const SPOTIFY_CLIENT_ID = 7e5966abed1f4e66b3a913ab4fe161e2;
+const SPOTIFY_CLIENT_ID = "7e5966abed1f4e66b3a913ab4fe161e2";
 const SPOTIFY_REDIRECT_URI = window.location.origin + window.location.pathname;
 const SPOTIFY_SCOPES = "user-read-currently-playing user-read-playback-state";
 let nowPlayingInterval = null;
@@ -488,7 +500,12 @@ async function fetchNowPlaying() {
 async function renderNowPlaying() {
   const box = document.getElementById("nowPlayingBar");
   if (!spotifyIsConnected()) {
-    box.innerHTML = `<button class="spotify-connect-btn" onclick="spotifyLogin()">🎧 Connect Spotify</button>`;
+    box.innerHTML = `
+      <button class="spotify-connect-btn" onclick="spotifyLogin()">🎧 Connect Spotify</button>
+      <div class="spotify-setup-hint">
+        Getting a "redirect_uri" error? Save this exact address in your Spotify app's Redirect URIs (tap box, then copy):
+        <input class="redirect-uri-box" type="text" readonly value="${SPOTIFY_REDIRECT_URI}" onclick="this.select()">
+      </div>`;
     return;
   }
   const info = await fetchNowPlaying();
@@ -943,9 +960,13 @@ ensureCoordsForAllItems();
 setInterval(renderNowBanner, 60000);
 
 (async function initSpotify() {
-  await handleSpotifyCallback();
-  renderNowPlaying();
-  if (spotifyIsConnected()) startNowPlayingPolling();
+  try {
+    await handleSpotifyCallback();
+    await renderNowPlaying();
+    if (spotifyIsConnected()) startNowPlayingPolling();
+  } catch (e) {
+    console.error("Spotify init failed", e);
+  }
 })();
 </script>
 
