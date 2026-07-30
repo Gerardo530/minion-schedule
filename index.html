@@ -76,6 +76,31 @@
   .spotify-setup-hint { font-size: 0.72em; color: var(--text-muted); margin-top: 8px; line-height: 1.4; }
   .redirect-uri-box { display: block; width: 100%; margin-top: 6px; padding: 8px 10px; background: var(--surface-alt); border: 1px dashed var(--border-light); border-radius: 8px; font-family: monospace; font-size: 0.76em; color: var(--text-main); box-sizing: border-box; }
 
+  .weather-card { display: flex; align-items: center; gap: 12px; background: var(--surface); border-radius: 14px; padding: 12px 14px; margin-bottom: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .weather-icon { font-size: 2em; flex-shrink: 0; }
+  .weather-info { flex: 1; min-width: 0; }
+  .weather-temp { font-size: 1.1em; font-weight: 800; color: var(--heading-color); }
+  .weather-label { font-size: 0.7em; font-weight: 600; color: var(--text-secondary); }
+  .weather-sub { font-size: 0.8em; color: var(--text-secondary); margin-top: 2px; }
+  .weather-hint { font-size: 0.78em; color: var(--warn-color); margin-top: 4px; font-weight: 600; }
+
+  .football-card { background: linear-gradient(135deg, var(--psu-navy) 0%, var(--psu-navy-dark) 100%); color: white; border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; box-shadow: 0 2px 8px rgba(4,30,66,0.2); position: relative; overflow: hidden; }
+  .football-card::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: repeating-linear-gradient(90deg, var(--accent-gold) 0 14px, white 14px 28px); opacity: 0.7; }
+  .football-header { font-size: 0.7em; font-weight: 700; letter-spacing: 0.5px; color: #b9c4d4; margin-bottom: 4px; }
+  .football-opp { font-size: 1.2em; font-weight: 800; }
+  .football-countdown { font-size: 1.5em; font-weight: 800; color: var(--accent-gold); margin-top: 4px; }
+  .football-date { font-size: 0.82em; color: #cfd8e3; margin-top: 2px; }
+  .football-directions { margin-top: 10px; background: rgba(255,255,255,0.15); }
+  .football-toggle { margin-top: 10px; background: rgba(255,255,255,0.12); border: none; color: white; font-size: 0.78em; font-weight: 600; padding: 6px 12px; border-radius: 20px; cursor: pointer; }
+  .football-list { margin-top: 10px; font-size: 0.82em; }
+  .football-list-item { padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1); color: #dbe3ee; }
+  .football-list-item:last-child { border-bottom: none; }
+
+  .next-due-pill { background: var(--surface); border-radius: 14px; padding: 10px 14px; margin-bottom: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); font-size: 0.85em; font-weight: 700; color: var(--heading-color); cursor: pointer; border-left: 4px solid var(--green); }
+  .next-due-pill.soon { border-left-color: var(--accent-gold); }
+  .next-due-pill.urgent { border-left-color: #d9622f; color: #b8461f; }
+  .next-due-pill.overdue { border-left-color: var(--red); color: var(--red); }
+
   .home-row { display: flex; align-items: center; gap: 6px; font-size: 0.82em; color: var(--text-secondary); margin-bottom: 14px; flex-wrap: wrap; }
   .home-row b { color: var(--heading-color); }
   .home-row button { background: none; border: none; color: var(--psu-blue-light); font-weight: 700; font-size: 0.95em; cursor: pointer; text-decoration: underline; padding: 0; }
@@ -138,7 +163,30 @@
   .remove-btn { color: var(--red); cursor: pointer; font-size: 0.78em; background: none; border: none; margin-top: 6px; font-weight: 600; padding: 0; }
   .remove-btn:active { opacity: 0.5; }
 
-  #scan-section { background: var(--surface); border-radius: 14px; padding: 18px; margin-top: 26px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-top: 4px solid var(--psu-blue-light); animation: fadeSlideUp 0.4s ease-out both; }
+  #assignments-section { background: var(--surface); border-radius: 14px; padding: 18px; margin-top: 26px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-top: 4px solid var(--red); }
+  #assignments-section h2 { margin-top: 0; color: var(--heading-color); font-size: 1.05em; display: flex; align-items: center; gap: 6px; }
+  .assign-card { background: var(--surface-alt); border-left: 5px solid var(--green); border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; }
+  .assign-card.soon { border-left-color: var(--accent-gold); background: var(--card-waitlist-bg); }
+  .assign-card.urgent { border-left-color: #d9622f; background: #fbe4d8; }
+  [data-theme="dark"] .assign-card.urgent { background: #3a2418; }
+  .assign-card.overdue { border-left-color: var(--red); background: #fbe0e2; }
+  [data-theme="dark"] .assign-card.overdue { background: #3a1a1e; }
+  .assign-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+  .assign-title { font-weight: 700; color: var(--text-main); }
+  .assign-meta { font-size: 0.8em; color: var(--text-secondary); margin-top: 2px; }
+  .assign-countdown { font-size: 0.78em; font-weight: 800; color: var(--heading-color); white-space: nowrap; }
+  .assign-card.urgent .assign-countdown, .assign-card.overdue .assign-countdown { color: #b8461f; }
+  .assign-due { font-size: 0.78em; color: var(--text-secondary); margin-top: 6px; }
+  .assign-actions { display: flex; gap: 14px; margin-top: 8px; }
+  .assign-actions button { background: none; border: none; font-size: 0.78em; font-weight: 700; cursor: pointer; padding: 0; }
+  .assign-actions button.done-btn { color: var(--green); }
+  .assign-actions button.del-btn { color: var(--red); }
+  .assign-form { margin-top: 16px; border-top: 1px solid var(--border-light); padding-top: 14px; }
+  .assign-form label { display: block; font-size: 0.8em; font-weight: 700; color: var(--text-main); margin-top: 10px; }
+  .assign-form input, .assign-form select { width: 100%; padding: 9px; margin-top: 4px; border: 1.5px solid var(--border-light); border-radius: 8px; font-size: 0.9em; background: var(--input-bg); color: var(--text-main); }
+  .assign-form button { width: 100%; margin-top: 14px; background: var(--red); color: white; border: none; padding: 12px; border-radius: 10px; font-weight: 700; cursor: pointer; }
+
+  #scan-section { background: var(--surface); border-radius: 14px; padding: 18px; margin-top: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-top: 4px solid var(--psu-blue-light); }
   #scan-section h2 { margin-top: 0; color: var(--heading-color); font-size: 1.05em; display: flex; align-items: center; gap: 6px; }
   .scan-desc { font-size: 0.85em; color: var(--text-secondary); line-height: 1.45; margin: 6px 0 12px 0; }
   .scan-btn-row { display: flex; gap: 8px; }
@@ -152,7 +200,24 @@
   .review-check { display: flex !important; align-items: center; gap: 6px; font-weight: 600 !important; }
   #scanReview > button { width: 100%; margin-top: 16px; background: var(--green); color: white; border: none; padding: 13px; border-radius: 10px; font-weight: 700; cursor: pointer; }
 
-  #add-form { background: var(--surface); border-radius: 14px; padding: 18px; margin-top: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-top: 4px solid var(--accent-gold); animation: fadeSlideUp 0.45s ease-out 0.1s both; }
+  #gpa-section { background: var(--surface); border-radius: 14px; padding: 18px; margin-top: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-top: 4px solid var(--green); }
+  #gpa-section h2 { margin-top: 0; color: var(--heading-color); font-size: 1.05em; display: flex; align-items: center; gap: 6px; }
+  .gpa-baseline-row { display: flex; gap: 10px; margin-bottom: 14px; }
+  .gpa-baseline-row > div { flex: 1; }
+  .gpa-baseline-row label { display: block; font-size: 0.72em; font-weight: 700; color: var(--text-secondary); margin-bottom: 4px; }
+  .gpa-baseline-row input { width: 100%; padding: 8px; border: 1.5px solid var(--border-light); border-radius: 7px; font-size: 0.85em; background: var(--input-bg); color: var(--text-main); box-sizing: border-box; }
+  .gpa-row { display: grid; grid-template-columns: 1fr 50px 62px 26px; gap: 6px; margin-bottom: 8px; align-items: center; }
+  .gpa-row input[type=text] { padding: 8px 6px; border: 1.5px solid var(--border-light); border-radius: 7px; font-size: 0.82em; background: var(--input-bg); color: var(--text-main); }
+  .gpa-row input[type=number] { padding: 8px 2px; border: 1.5px solid var(--border-light); border-radius: 7px; font-size: 0.82em; text-align: center; background: var(--input-bg); color: var(--text-main); }
+  .gpa-row select { padding: 8px 2px; border: 1.5px solid var(--border-light); border-radius: 7px; font-size: 0.82em; background: var(--input-bg); color: var(--text-main); }
+  .gpa-row button { background: none; border: none; color: var(--red); font-size: 1.1em; cursor: pointer; }
+  .gpa-add-btn { width: 100%; background: var(--surface-alt); color: var(--heading-color); border: 1.5px dashed var(--border-light); padding: 10px; border-radius: 8px; font-weight: 700; font-size: 0.86em; cursor: pointer; margin-top: 4px; }
+  .gpa-result { margin-top: 16px; background: var(--surface-alt); border-radius: 10px; padding: 12px 14px; }
+  .gpa-result-row { display: flex; justify-content: space-between; align-items: baseline; padding: 4px 0; font-size: 0.92em; color: var(--text-main); }
+  .gpa-result-row b { font-size: 1.3em; color: var(--heading-color); }
+  .gpa-result-sub { font-size: 0.76em; color: var(--text-secondary); margin-top: 4px; }
+
+  #add-form { background: var(--surface); border-radius: 14px; padding: 18px; margin-top: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-top: 4px solid var(--accent-gold); }
   #add-form h2 { margin-top: 0; color: var(--heading-color); font-size: 1.05em; display: flex; align-items: center; gap: 6px; }
   #add-form label { display: block; margin-top: 12px; font-size: 0.85em; font-weight: 700; color: var(--text-main); }
   #add-form input[type=text], #add-form input[type=time] { width: 100%; padding: 10px; margin-top: 5px; border: 1.5px solid var(--border-light); border-radius: 8px; font-size: 0.95em; background: var(--input-bg); color: var(--text-main); }
@@ -200,10 +265,32 @@
 
 <div id="content">
   <div id="nowPlayingBar" class="now-playing-bar"></div>
+  <div id="weatherWidget"></div>
+  <div id="footballWidget"></div>
+  <div id="nextDueWidget"></div>
   <div class="home-row">🏠 Home base: <b id="homeLabel">Brumbaugh Hall (Dorm)</b> <button onclick="editHome()">Edit</button></div>
   <div id="now-banner" onclick="openBannerModal()"></div>
   <div class="paw-divider">🐾 🐾 🐾 🐾 🐾</div>
   <div id="week-container"></div>
+
+  <div id="assignments-section">
+    <h2>📝 Assignments & Exams</h2>
+    <div id="assignmentsList"></div>
+    <div class="assign-form">
+      <label>Title</label>
+      <input type="text" id="assignTitle" placeholder="e.g. Essay 2, Midterm Exam">
+      <label>Course</label>
+      <input type="text" id="assignCourse" list="courseList" placeholder="e.g. ENGL 30H">
+      <datalist id="courseList"></datalist>
+      <label>Type</label>
+      <select id="assignType">
+        <option>Assignment</option><option>Exam</option><option>Quiz</option><option>Project</option><option>Reading</option>
+      </select>
+      <label>Due Date & Time</label>
+      <input type="datetime-local" id="assignDue">
+      <button onclick="addAssignment()">+ Add</button>
+    </div>
+  </div>
 
   <div id="scan-section">
     <h2>📷 Scan Your Schedule</h2>
@@ -217,6 +304,17 @@
     <div id="scanStatus" class="scan-status"></div>
     <div id="scanReview" style="display:none;"></div>
     <button class="reset-link" onclick="resetToDefaults()">↺ Reset to original schedule</button>
+  </div>
+
+  <div id="gpa-section">
+    <h2>🎓 GPA Calculator</h2>
+    <div class="gpa-baseline-row">
+      <div><label>Current Cumulative GPA (optional)</label><input type="number" step="0.01" min="0" max="4" id="gpaBaseGpa" oninput="updateGpaBaseline('gpa', this.value)" placeholder="e.g. 3.45"></div>
+      <div><label>Current Total Credits (optional)</label><input type="number" step="0.5" min="0" id="gpaBaseCredits" oninput="updateGpaBaseline('credits', this.value)" placeholder="e.g. 45"></div>
+    </div>
+    <div id="gpaCourseList"></div>
+    <button class="gpa-add-btn" onclick="addGpaCourse()">+ Add Course</button>
+    <div id="gpaResult" class="gpa-result"></div>
   </div>
 
   <div id="add-form">
@@ -273,6 +371,23 @@ const classes = [
 ];
 
 const HOME_DEFAULT = { name: "Brumbaugh Hall (Dorm)", address: "620 E Park Ave, University Park, PA 16802", lat: 40.8064275, lon: -77.8634179 };
+const BEAVER_STADIUM = { lat: 40.8113202, lon: -77.85503949999999 };
+const PSU_GRADE_POINTS = { "A": 4.00, "A-": 3.67, "B+": 3.33, "B": 3.00, "B-": 2.67, "C+": 2.33, "C": 2.00, "D": 1.00, "F": 0.00 };
+
+const FOOTBALL_SCHEDULE = [
+  { opponent: "Marshall", home: true, start: "2026-09-05T19:30:00Z", tbd: false },
+  { opponent: "Temple", home: false, start: "2026-09-12T16:00:00Z", tbd: false },
+  { opponent: "Buffalo", home: true, start: "2026-09-19T16:00:00Z", tbd: false },
+  { opponent: "Wisconsin", home: true, start: "2026-09-26T17:00:00Z", tbd: true },
+  { opponent: "Northwestern", home: false, start: "2026-10-03T00:00:00Z", tbd: false },
+  { opponent: "USC", home: true, start: "2026-10-10T17:00:00Z", tbd: true },
+  { opponent: "Michigan", home: false, start: "2026-10-17T17:00:00Z", tbd: true },
+  { opponent: "Purdue", home: true, start: "2026-10-31T17:00:00Z", tbd: true },
+  { opponent: "Washington", home: false, start: "2026-11-07T18:00:00Z", tbd: true },
+  { opponent: "Minnesota", home: true, start: "2026-11-14T18:00:00Z", tbd: true },
+  { opponent: "Rutgers", home: true, start: "2026-11-21T18:00:00Z", tbd: true },
+  { opponent: "Maryland", home: false, start: "2026-11-28T18:00:00Z", tbd: true }
+];
 
 let allItems = [];
 let currentBannerItemId = null;
@@ -308,6 +423,12 @@ function loadCoordCache() { return JSON.parse(localStorage.getItem("coordCache")
 function saveCoordCache(c) { localStorage.setItem("coordCache", JSON.stringify(c)); }
 function loadWalkOverrides() { return JSON.parse(localStorage.getItem("walkOverrides") || "{}"); }
 function saveWalkOverrides(o) { localStorage.setItem("walkOverrides", JSON.stringify(o)); }
+function loadAssignments() { return JSON.parse(localStorage.getItem("assignments") || "[]"); }
+function saveAssignments(list) { localStorage.setItem("assignments", JSON.stringify(list)); }
+function loadGpaCourses() { return JSON.parse(localStorage.getItem("gpaCourses") || "[]"); }
+function saveGpaCourses(list) { localStorage.setItem("gpaCourses", JSON.stringify(list)); }
+function loadGpaBaseline() { return JSON.parse(localStorage.getItem("gpaBaseline") || '{"gpa":"","credits":""}'); }
+function saveGpaBaseline(b) { localStorage.setItem("gpaBaseline", JSON.stringify(b)); }
 
 function toMinutes(t) { const [h,m] = t.split(":").map(Number); return h*60+m; }
 function directionsUrl(building) {
@@ -400,7 +521,275 @@ async function editHome() {
   if (!coords) { alert("Couldn't locate that address automatically — keeping your previous home base. Try a more specific address."); return; }
   saveHome({ name, address, lat: coords.lat, lon: coords.lon });
   document.getElementById("homeLabel").textContent = name;
-  renderWeek(); renderNowBanner();
+  renderWeek(); renderNowBanner(); renderFootball(); renderWeather();
+}
+
+// ---------- weather ----------
+async function fetchWeather() {
+  const home = loadHome();
+  try {
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${home.lat}&longitude=${home.lon}&current=temperature_2m,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=America%2FNew_York&forecast_days=1`;
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    return await res.json();
+  } catch (e) { console.error("Weather fetch failed", e); return null; }
+}
+function weatherCodeInfo(code) {
+  const map = {
+    0: ["☀️","Clear sky"], 1: ["🌤️","Mainly clear"], 2: ["⛅","Partly cloudy"], 3: ["☁️","Overcast"],
+    45: ["🌫️","Fog"], 48: ["🌫️","Freezing fog"],
+    51: ["🌦️","Light drizzle"], 53: ["🌦️","Drizzle"], 55: ["🌧️","Dense drizzle"],
+    56: ["🌧️","Freezing drizzle"], 57: ["🌧️","Freezing drizzle"],
+    61: ["🌦️","Light rain"], 63: ["🌧️","Rain"], 65: ["🌧️","Heavy rain"],
+    66: ["🌧️","Freezing rain"], 67: ["🌧️","Freezing rain"],
+    71: ["🌨️","Light snow"], 73: ["🌨️","Snow"], 75: ["❄️","Heavy snow"], 77: ["🌨️","Snow grains"],
+    80: ["🌦️","Rain showers"], 81: ["🌧️","Rain showers"], 82: ["⛈️","Violent showers"],
+    85: ["🌨️","Snow showers"], 86: ["❄️","Snow showers"],
+    95: ["⛈️","Thunderstorm"], 96: ["⛈️","Thunderstorm w/ hail"], 99: ["⛈️","Severe thunderstorm"]
+  };
+  return map[code] || ["🌡️","Weather"];
+}
+function whatToWearHint(tempF, precipProb, windMph) {
+  let hints = [];
+  if (tempF <= 32) hints.push("bundle up — heavy coat weather");
+  else if (tempF <= 45) hints.push("wear a real jacket");
+  else if (tempF <= 60) hints.push("light jacket or hoodie");
+  else if (tempF <= 75) hints.push("t-shirt weather");
+  else hints.push("hot — dress light");
+  if (precipProb >= 50) hints.push("bring an umbrella");
+  if (windMph >= 20) hints.push("windy, secure loose stuff");
+  return hints.join(", ");
+}
+async function renderWeather() {
+  const box = document.getElementById("weatherWidget");
+  const data = await fetchWeather();
+  if (!data || !data.current) { box.innerHTML = ""; return; }
+  const [icon, label] = weatherCodeInfo(data.current.weather_code);
+  const temp = Math.round(data.current.temperature_2m);
+  const hi = Math.round(data.daily.temperature_2m_max[0]);
+  const lo = Math.round(data.daily.temperature_2m_min[0]);
+  const precip = Math.round(data.daily.precipitation_probability_max[0] || 0);
+  const wind = Math.round(data.current.wind_speed_10m);
+  const hint = whatToWearHint(temp, precip, wind);
+  box.innerHTML = `
+    <div class="weather-card">
+      <div class="weather-icon">${icon}</div>
+      <div class="weather-info">
+        <div class="weather-temp">${temp}°F <span class="weather-label">${label}</span></div>
+        <div class="weather-sub">H:${hi}° L:${lo}° · ${precip}% rain${wind >= 12 ? " · " + wind + " mph wind" : ""}</div>
+        <div class="weather-hint">👕 ${hint}</div>
+      </div>
+    </div>`;
+}
+
+// ---------- football ----------
+function formatCountdown(target) {
+  const diffMs = target - new Date();
+  if (diffMs <= 0) return null;
+  const days = Math.floor(diffMs / 86400000);
+  const hours = Math.floor((diffMs % 86400000) / 3600000);
+  if (days > 0) return `${days}d ${hours}h`;
+  const mins = Math.floor((diffMs % 3600000) / 60000);
+  return `${hours}h ${mins}m`;
+}
+function toggleFootballList() {
+  const el = document.getElementById("footballList");
+  if (el) el.style.display = el.style.display === "none" ? "block" : "none";
+}
+function renderFootball() {
+  const box = document.getElementById("footballWidget");
+  const now = new Date();
+  const upcoming = FOOTBALL_SCHEDULE.filter(g => new Date(g.start) > now);
+  if (upcoming.length === 0) {
+    box.innerHTML = `<div class="football-card"><div class="football-header">🏈 PSU FOOTBALL</div><div class="football-opp">Season complete — We Are!</div></div>`;
+    return;
+  }
+  const next = upcoming[0];
+  const gameDate = new Date(next.start);
+  const countdown = formatCountdown(gameDate);
+  const dateStr = gameDate.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
+  const timeStr = gameDate.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+
+  let html = `
+    <div class="football-card">
+      <div class="football-header">🏈 NEXT PSU FOOTBALL${next.home ? " · HOME" : " · AWAY"}</div>
+      <div class="football-opp">${next.home ? "vs" : "at"} ${next.opponent}</div>
+      <div class="football-countdown">${countdown} to kickoff</div>
+      <div class="football-date">${dateStr} · ${timeStr}${next.tbd ? " (time TBD)" : ""}</div>
+  `;
+  if (next.home) {
+    const home = loadHome();
+    const walkMin = estimateWalkMinutes(home, BEAVER_STADIUM);
+    html += `<a class="directions-link football-directions" target="_blank" href="${directionsUrl('Beaver Stadium')}">📍 ${walkMin ? "~" + walkMin + " min walk from " + home.name : "Get directions"}</a>`;
+  } else {
+    html += `<a class="directions-link football-directions" target="_blank" href="https://www.google.com/search?q=${encodeURIComponent('Penn State vs ' + next.opponent + ' where to watch')}">📺 Find where to watch</a>`;
+  }
+  html += `<button class="football-toggle" onclick="toggleFootballList()">${upcoming.length} game${upcoming.length===1?"":"s"} remaining ▾</button>
+    <div class="football-list" id="footballList" style="display:none;">`;
+  upcoming.forEach(g => {
+    const d = new Date(g.start);
+    html += `<div class="football-list-item">${g.home ? "vs" : "at"} ${g.opponent} — ${d.toLocaleDateString("en-US",{month:"short",day:"numeric"})}${g.tbd ? " (TBD)" : ""}</div>`;
+  });
+  html += `</div></div>`;
+  box.innerHTML = html;
+}
+
+// ---------- assignments & exams ----------
+function assignmentUrgency(dueDate) {
+  const diffH = (new Date(dueDate) - new Date()) / 3600000;
+  if (diffH < 0) return "overdue";
+  if (diffH < 24) return "urgent";
+  if (diffH < 72) return "soon";
+  return "normal";
+}
+function dueCountdownText(dueDate) {
+  const diffMs = new Date(dueDate) - new Date();
+  const diffH = diffMs / 3600000;
+  if (diffMs < 0) {
+    const overdueH = Math.abs(diffH);
+    return overdueH < 24 ? "Overdue" : `Overdue by ${Math.floor(overdueH/24)}d`;
+  }
+  if (diffH < 1) return `Due in ${Math.round(diffMs/60000)}m`;
+  if (diffH < 24) return `Due in ${Math.round(diffH)}h`;
+  return `Due in ${Math.floor(diffH/24)}d`;
+}
+function addAssignment() {
+  const title = document.getElementById("assignTitle").value.trim();
+  const course = document.getElementById("assignCourse").value.trim();
+  const type = document.getElementById("assignType").value;
+  const dueDate = document.getElementById("assignDue").value;
+  if (!title || !dueDate) { alert("Please add a title and due date."); return; }
+  const list = loadAssignments();
+  list.push({ id: "assign-" + Date.now() + "-" + Math.random().toString(36).slice(2,7), title, course, type, dueDate, completed: false });
+  saveAssignments(list);
+  document.getElementById("assignTitle").value = "";
+  document.getElementById("assignCourse").value = "";
+  document.getElementById("assignDue").value = "";
+  renderAssignments();
+}
+function completeAssignment(id) {
+  const list = loadAssignments();
+  const item = list.find(a => a.id === id);
+  if (item) item.completed = true;
+  saveAssignments(list);
+  renderAssignments();
+}
+function deleteAssignment(id) {
+  saveAssignments(loadAssignments().filter(a => a.id !== id));
+  renderAssignments();
+}
+function renderNextDueWidget(list) {
+  const box = document.getElementById("nextDueWidget");
+  if (!list || list.length === 0) { box.innerHTML = ""; return; }
+  const next = list[0];
+  const urgency = assignmentUrgency(next.dueDate);
+  box.innerHTML = `<div class="next-due-pill ${urgency}" onclick="document.getElementById('assignments-section').scrollIntoView({behavior:'smooth'})">📝 ${next.title}${next.course ? " (" + next.course + ")" : ""} — ${dueCountdownText(next.dueDate)}</div>`;
+}
+function renderAssignments() {
+  const list = loadAssignments().filter(a => !a.completed).sort((a,b) => new Date(a.dueDate) - new Date(b.dueDate));
+  const box = document.getElementById("assignmentsList");
+  if (list.length === 0) {
+    box.innerHTML = `<div class="empty-day">Nothing due — you're all caught up 🎉</div>`;
+  } else {
+    box.innerHTML = list.map(a => {
+      const urgency = assignmentUrgency(a.dueDate);
+      const due = new Date(a.dueDate);
+      const dueStr = due.toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"}) + " · " + due.toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"});
+      return `
+        <div class="assign-card ${urgency}">
+          <div class="assign-top">
+            <div>
+              <div class="assign-title">${a.title}</div>
+              <div class="assign-meta">${a.type}${a.course ? " · " + a.course : ""}</div>
+            </div>
+            <div class="assign-countdown">${dueCountdownText(a.dueDate)}</div>
+          </div>
+          <div class="assign-due">${dueStr}</div>
+          <div class="assign-actions">
+            <button class="done-btn" onclick="completeAssignment('${a.id}')">✓ Done</button>
+            <button class="del-btn" onclick="deleteAssignment('${a.id}')">✕ Remove</button>
+          </div>
+        </div>`;
+    }).join("");
+  }
+  renderNextDueWidget(list);
+  const datalist = document.getElementById("courseList");
+  if (datalist) {
+    const courseNames = [...new Set(allItems.filter(e => !e.isClub).map(e => e.name))];
+    datalist.innerHTML = courseNames.map(n => `<option value="${n}">`).join("");
+  }
+}
+
+// ---------- GPA calculator ----------
+function addGpaCourse() {
+  const list = loadGpaCourses();
+  list.push({ id: "gpa-" + Date.now() + "-" + Math.random().toString(36).slice(2,5), name: "", credits: 3, grade: "A" });
+  saveGpaCourses(list);
+  renderGpaCalculator();
+}
+function updateGpaCourse(id, field, value) {
+  const list = loadGpaCourses();
+  const c = list.find(x => x.id === id);
+  if (c) c[field] = field === "credits" ? (parseFloat(value) || 0) : value;
+  saveGpaCourses(list);
+  renderGpaResult();
+}
+function removeGpaCourse(id) {
+  saveGpaCourses(loadGpaCourses().filter(c => c.id !== id));
+  renderGpaCalculator();
+}
+function updateGpaBaseline(field, value) {
+  const b = loadGpaBaseline();
+  b[field] = value;
+  saveGpaBaseline(b);
+  renderGpaResult();
+}
+function computeGpa() {
+  const courses = loadGpaCourses();
+  let totalPoints = 0, totalCredits = 0;
+  courses.forEach(c => {
+    const pts = PSU_GRADE_POINTS[c.grade];
+    if (pts != null && c.credits > 0) { totalPoints += pts * c.credits; totalCredits += c.credits; }
+  });
+  const semesterGpa = totalCredits > 0 ? totalPoints / totalCredits : null;
+  const baseline = loadGpaBaseline();
+  const baseGpa = parseFloat(baseline.gpa);
+  const baseCredits = parseFloat(baseline.credits);
+  let cumulativeGpa = null;
+  if (!isNaN(baseGpa) && !isNaN(baseCredits) && baseCredits > 0) {
+    const combinedCredits = baseCredits + totalCredits;
+    cumulativeGpa = combinedCredits > 0 ? ((baseGpa * baseCredits) + totalPoints) / combinedCredits : null;
+  }
+  return { semesterGpa, cumulativeGpa, totalCredits };
+}
+function renderGpaResult() {
+  const { semesterGpa, cumulativeGpa, totalCredits } = computeGpa();
+  const box = document.getElementById("gpaResult");
+  let html = `<div class="gpa-result-row"><span>This Semester</span><b>${semesterGpa != null ? semesterGpa.toFixed(2) : "—"}</b></div>`;
+  if (cumulativeGpa != null) html += `<div class="gpa-result-row"><span>New Cumulative</span><b>${cumulativeGpa.toFixed(2)}</b></div>`;
+  html += `<div class="gpa-result-sub">${totalCredits} credit${totalCredits===1?"":"s"} entered this semester</div>`;
+  box.innerHTML = html;
+}
+function renderGpaCalculator() {
+  const courses = loadGpaCourses();
+  const box = document.getElementById("gpaCourseList");
+  if (courses.length === 0) {
+    box.innerHTML = `<div class="empty-day">No courses added yet</div>`;
+  } else {
+    box.innerHTML = courses.map(c => `
+      <div class="gpa-row">
+        <input type="text" placeholder="Course name" value="${c.name}" oninput="updateGpaCourse('${c.id}','name',this.value)">
+        <input type="number" min="0" step="0.5" value="${c.credits}" oninput="updateGpaCourse('${c.id}','credits',this.value)">
+        <select onchange="updateGpaCourse('${c.id}','grade',this.value)">
+          ${Object.keys(PSU_GRADE_POINTS).map(g => `<option value="${g}" ${g===c.grade?"selected":""}>${g}</option>`).join("")}
+        </select>
+        <button onclick="removeGpaCourse('${c.id}')">✕</button>
+      </div>`).join("");
+  }
+  const baseline = loadGpaBaseline();
+  document.getElementById("gpaBaseGpa").value = baseline.gpa || "";
+  document.getElementById("gpaBaseCredits").value = baseline.credits || "";
+  renderGpaResult();
 }
 
 // ---------- Spotify ----------
@@ -956,8 +1345,13 @@ document.getElementById("themeToggle").textContent = (document.documentElement.g
 document.getElementById("homeLabel").textContent = loadHome().name;
 renderWeek();
 renderNowBanner();
+renderWeather();
+renderFootball();
+renderAssignments();
+renderGpaCalculator();
 ensureCoordsForAllItems();
-setInterval(renderNowBanner, 60000);
+setInterval(() => { renderNowBanner(); renderFootball(); renderAssignments(); }, 60000);
+setInterval(renderWeather, 20*60*1000);
 
 (async function initSpotify() {
   try {
