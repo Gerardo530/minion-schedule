@@ -217,6 +217,30 @@
   .gpa-result-row b { font-size: 1.3em; color: var(--heading-color); }
   .gpa-result-sub { font-size: 0.76em; color: var(--text-secondary); margin-top: 4px; }
 
+  #workout-section { background: var(--surface); border-radius: 14px; padding: 18px; margin-top: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-top: 4px solid var(--purple); }
+  #workout-section h2 { margin-top: 0; color: var(--heading-color); font-size: 1.05em; display: flex; align-items: center; gap: 6px; }
+  .wk-summary { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
+  .wk-streak { font-size: 1em; font-weight: 800; color: var(--heading-color); }
+  .wk-week-strip { display: flex; gap: 5px; }
+  .wk-day { width: 26px; height: 26px; border-radius: 50%; background: var(--surface-alt); color: var(--text-muted); font-size: 0.7em; font-weight: 700; display: flex; align-items: center; justify-content: center; border: 1.5px solid var(--border-light); }
+  .wk-day.active { background: var(--purple); color: white; border-color: var(--purple); }
+  .wk-goal-bar { margin-bottom: 14px; }
+  .wk-goal-label { font-size: 0.8em; color: var(--text-secondary); margin-bottom: 5px; font-weight: 600; }
+  .wk-edit-goal { cursor: pointer; color: var(--psu-blue-light); font-weight: 700; margin-left: 6px; }
+  .wk-goal-track { height: 8px; background: var(--surface-alt); border-radius: 6px; overflow: hidden; }
+  .wk-goal-fill { height: 100%; background: var(--purple); border-radius: 6px; transition: width 0.4s ease; }
+  .workout-card { background: var(--surface-alt); border-left: 5px solid var(--purple); border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; }
+  .workout-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .workout-type { font-weight: 700; color: var(--text-main); font-size: 0.92em; }
+  .workout-date { font-size: 0.78em; color: var(--text-secondary); margin-top: 2px; }
+  .workout-notes { font-size: 0.82em; color: var(--text-secondary); margin-top: 6px; font-style: italic; }
+  .wk-del { background: none; border: none; color: var(--red); font-size: 0.95em; cursor: pointer; }
+
+  #discord-section { background: var(--surface); border-radius: 14px; padding: 18px; margin-top: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-top: 4px solid #5865F2; }
+  #discord-section h2 { margin-top: 0; color: var(--heading-color); font-size: 1.05em; display: flex; align-items: center; gap: 6px; }
+  #discord-section label { display: block; font-size: 0.8em; font-weight: 700; color: var(--text-main); margin-top: 10px; }
+  #discord-section input { width: 100%; padding: 9px; margin-top: 4px; border: 1.5px solid var(--border-light); border-radius: 8px; font-size: 0.88em; background: var(--input-bg); color: var(--text-main); box-sizing: border-box; }
+
   #add-form { background: var(--surface); border-radius: 14px; padding: 18px; margin-top: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-top: 4px solid var(--accent-gold); }
   #add-form h2 { margin-top: 0; color: var(--heading-color); font-size: 1.05em; display: flex; align-items: center; gap: 6px; }
   #add-form label { display: block; margin-top: 12px; font-size: 0.85em; font-weight: 700; color: var(--text-main); }
@@ -315,6 +339,44 @@
     <div id="gpaCourseList"></div>
     <button class="gpa-add-btn" onclick="addGpaCourse()">+ Add Course</button>
     <div id="gpaResult" class="gpa-result"></div>
+  </div>
+
+  <div id="workout-section">
+    <h2>🏋️ Workout Tracker</h2>
+    <div class="wk-summary">
+      <div id="workoutStreak" class="wk-streak"></div>
+      <div id="workoutWeekStrip" class="wk-week-strip"></div>
+    </div>
+    <div id="workoutGoalBar" class="wk-goal-bar"></div>
+    <div id="workoutHistory"></div>
+    <div class="assign-form">
+      <label>Date</label>
+      <input type="date" id="workoutDate">
+      <label>Type</label>
+      <select id="workoutType">
+        <option>Push</option><option>Pull</option><option>Legs</option><option>Upper Body</option>
+        <option>Lower Body</option><option>Full Body</option><option>Cardio</option><option>Other</option>
+      </select>
+      <label>Duration (minutes, optional)</label>
+      <input type="number" id="workoutDuration" min="1" placeholder="e.g. 60">
+      <label>Notes (optional)</label>
+      <input type="text" id="workoutNotes" placeholder="e.g. bench 135x8, squat 185x5">
+      <button onclick="addWorkout()">+ Log Workout</button>
+    </div>
+  </div>
+
+  <div id="discord-section">
+    <h2>💬 Discord Notifications</h2>
+    <p class="scan-desc">Get pinged before class starts or when something's due. Your webhook URL saves only in this browser's storage — never in the code you commit, since your repo is public. Don't paste it into the GitHub file itself.</p>
+    <label>Webhook URL</label>
+    <input type="text" id="discordWebhookInput" placeholder="https://discord.com/api/webhooks/...">
+    <label>Remind me before class (minutes)</label>
+    <input type="number" id="discordLeadInput" min="1" max="60" value="15">
+    <div class="scan-btn-row" style="margin-top:12px;">
+      <button class="scan-btn" onclick="saveDiscordSettings()">💾 Save</button>
+      <button class="scan-btn" onclick="testDiscordWebhook()">🔔 Send Test</button>
+    </div>
+    <div id="discordStatus" class="scan-status"></div>
   </div>
 
   <div id="add-form">
@@ -429,6 +491,12 @@ function loadGpaCourses() { return JSON.parse(localStorage.getItem("gpaCourses")
 function saveGpaCourses(list) { localStorage.setItem("gpaCourses", JSON.stringify(list)); }
 function loadGpaBaseline() { return JSON.parse(localStorage.getItem("gpaBaseline") || '{"gpa":"","credits":""}'); }
 function saveGpaBaseline(b) { localStorage.setItem("gpaBaseline", JSON.stringify(b)); }
+function loadWorkouts() { return JSON.parse(localStorage.getItem("workouts") || "[]"); }
+function saveWorkouts(list) { localStorage.setItem("workouts", JSON.stringify(list)); }
+function loadWorkoutGoal() { return parseInt(localStorage.getItem("workoutGoal") || "4", 10); }
+function saveWorkoutGoal(n) { localStorage.setItem("workoutGoal", String(n)); }
+function loadNotifiedLog() { return JSON.parse(localStorage.getItem("discordNotified") || "{}"); }
+function saveNotifiedLog(log) { localStorage.setItem("discordNotified", JSON.stringify(log)); }
 
 function toMinutes(t) { const [h,m] = t.split(":").map(Number); return h*60+m; }
 function directionsUrl(building) {
@@ -792,129 +860,161 @@ function renderGpaCalculator() {
   renderGpaResult();
 }
 
-// ---------- Spotify ----------
-const SPOTIFY_CLIENT_ID = "7e5966abed1f4e66b3a913ab4fe161e2";
-const SPOTIFY_REDIRECT_URI = window.location.origin + window.location.pathname;
-const SPOTIFY_SCOPES = "user-read-currently-playing user-read-playback-state";
-let nowPlayingInterval = null;
+// ---------- workout tracker ----------
+function addWorkout() {
+  const date = document.getElementById("workoutDate").value || new Date().toISOString().slice(0,10);
+  const type = document.getElementById("workoutType").value;
+  const duration = parseInt(document.getElementById("workoutDuration").value, 10) || null;
+  const notes = document.getElementById("workoutNotes").value.trim();
+  const list = loadWorkouts();
+  list.push({ id: "wk-" + Date.now() + "-" + Math.random().toString(36).slice(2,5), date, type, duration, notes });
+  saveWorkouts(list);
+  document.getElementById("workoutNotes").value = "";
+  document.getElementById("workoutDuration").value = "";
+  renderWorkouts();
+}
+function deleteWorkout(id) {
+  saveWorkouts(loadWorkouts().filter(w => w.id !== id));
+  renderWorkouts();
+}
+function editWorkoutGoal() {
+  const current = loadWorkoutGoal();
+  const input = prompt("Weekly workout goal:", current);
+  if (input === null) return;
+  const val = parseInt(input, 10);
+  if (!isNaN(val) && val > 0) saveWorkoutGoal(val);
+  renderWorkouts();
+}
+function computeStreak(workouts) {
+  const dates = new Set(workouts.map(w => w.date));
+  let streak = 0;
+  let cursor = new Date();
+  cursor.setHours(0,0,0,0);
+  if (!dates.has(cursor.toISOString().slice(0,10))) cursor.setDate(cursor.getDate() - 1);
+  while (dates.has(cursor.toISOString().slice(0,10))) {
+    streak++;
+    cursor.setDate(cursor.getDate() - 1);
+  }
+  return streak;
+}
+function render7DayStrip(workouts) {
+  const dates = new Set(workouts.map(w => w.date));
+  let html = "";
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const key = d.toISOString().slice(0,10);
+    const label = d.toLocaleDateString("en-US", { weekday: "narrow" });
+    html += `<div class="wk-day ${dates.has(key) ? "active" : ""}" title="${d.toLocaleDateString()}">${label}</div>`;
+  }
+  return html;
+}
+function weeklyCount(workouts) {
+  const now = new Date();
+  const startOfWeek = new Date(now);
+  startOfWeek.setDate(now.getDate() - now.getDay());
+  startOfWeek.setHours(0,0,0,0);
+  return workouts.filter(w => new Date(w.date + "T00:00:00") >= startOfWeek).length;
+}
+function renderWorkouts() {
+  const workouts = loadWorkouts().sort((a,b) => new Date(b.date) - new Date(a.date));
+  const streak = computeStreak(workouts);
+  const weekCount = weeklyCount(workouts);
+  const goal = loadWorkoutGoal();
+  const pct = Math.min(100, Math.round((weekCount / goal) * 100));
 
-function spotifyRandomString(length) {
-  const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  const values = crypto.getRandomValues(new Uint8Array(length));
-  return values.reduce((acc, x) => acc + possible[x % possible.length], "");
-}
-async function spotifySha256(plain) {
-  return crypto.subtle.digest("SHA-256", new TextEncoder().encode(plain));
-}
-function spotifyBase64Encode(input) {
-  return btoa(String.fromCharCode(...new Uint8Array(input))).replace(/=/g,"").replace(/\+/g,"-").replace(/\//g,"_");
-}
-async function spotifyLogin() {
-  if (!SPOTIFY_CLIENT_ID || SPOTIFY_CLIENT_ID === "PASTE_YOUR_SPOTIFY_CLIENT_ID_HERE") {
-    alert("Spotify isn't set up yet — paste your Client ID into SPOTIFY_CLIENT_ID near the top of the script first.");
-    return;
+  document.getElementById("workoutStreak").innerHTML = `🔥 ${streak} day streak`;
+  document.getElementById("workoutWeekStrip").innerHTML = render7DayStrip(workouts);
+  document.getElementById("workoutGoalBar").innerHTML = `
+    <div class="wk-goal-label">This week: ${weekCount} / ${goal} workouts <span class="wk-edit-goal" onclick="editWorkoutGoal()">✏️ edit goal</span></div>
+    <div class="wk-goal-track"><div class="wk-goal-fill" style="width:${pct}%"></div></div>
+  `;
+
+  const list = document.getElementById("workoutHistory");
+  if (workouts.length === 0) {
+    list.innerHTML = `<div class="empty-day">No workouts logged yet — add your first one below!</div>`;
+  } else {
+    list.innerHTML = workouts.slice(0, 10).map(w => `
+      <div class="workout-card">
+        <div class="workout-top">
+          <div>
+            <div class="workout-type">${w.type}</div>
+            <div class="workout-date">${new Date(w.date + "T00:00:00").toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"})}${w.duration ? " · " + w.duration + " min" : ""}</div>
+          </div>
+          <button class="wk-del" onclick="deleteWorkout('${w.id}')">✕</button>
+        </div>
+        ${w.notes ? `<div class="workout-notes">${w.notes}</div>` : ""}
+      </div>`).join("");
   }
-  const verifier = spotifyRandomString(64);
-  localStorage.setItem("spotify_code_verifier", verifier);
-  const challenge = spotifyBase64Encode(await spotifySha256(verifier));
-  const state = spotifyRandomString(16);
-  localStorage.setItem("spotify_state", state);
-  const authUrl = new URL("https://accounts.spotify.com/authorize");
-  authUrl.search = new URLSearchParams({
-    response_type: "code", client_id: SPOTIFY_CLIENT_ID, scope: SPOTIFY_SCOPES,
-    code_challenge_method: "S256", code_challenge: challenge, redirect_uri: SPOTIFY_REDIRECT_URI, state
-  }).toString();
-  window.location.href = authUrl.toString();
 }
-function saveSpotifyTokens(data) {
-  localStorage.setItem("spotify_access_token", data.access_token);
-  localStorage.setItem("spotify_expires_at", String(Date.now() + data.expires_in * 1000 - 30000));
-  if (data.refresh_token) localStorage.setItem("spotify_refresh_token", data.refresh_token);
+
+// ---------- Discord notifications ----------
+function loadDiscordSettingsIntoUI() {
+  document.getElementById("discordWebhookInput").value = localStorage.getItem("discordWebhook") || "";
+  document.getElementById("discordLeadInput").value = localStorage.getItem("discordLeadMinutes") || "15";
 }
-function spotifyIsConnected() { return !!localStorage.getItem("spotify_refresh_token"); }
-async function spotifyGetValidToken() {
-  const expiresAt = parseInt(localStorage.getItem("spotify_expires_at") || "0", 10);
-  const accessToken = localStorage.getItem("spotify_access_token");
-  if (accessToken && Date.now() < expiresAt) return accessToken;
-  const refreshToken = localStorage.getItem("spotify_refresh_token");
-  if (!refreshToken) return null;
+function saveDiscordSettings() {
+  const url = document.getElementById("discordWebhookInput").value.trim();
+  const lead = document.getElementById("discordLeadInput").value;
+  if (url) localStorage.setItem("discordWebhook", url);
+  else localStorage.removeItem("discordWebhook");
+  localStorage.setItem("discordLeadMinutes", lead || "15");
+  const status = document.getElementById("discordStatus");
+  status.textContent = url ? "✓ Saved!" : "Webhook cleared.";
+  setTimeout(() => { status.textContent = ""; }, 2000);
+}
+async function sendDiscordMessage({title, description}) {
+  const webhook = localStorage.getItem("discordWebhook");
+  if (!webhook) return false;
   try {
-    const res = await fetch("https://accounts.spotify.com/api/token", {
-      method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({ grant_type: "refresh_token", refresh_token: refreshToken, client_id: SPOTIFY_CLIENT_ID })
+    const res = await fetch(webhook, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username: "PSU Schedule", embeds: [{ title, description, color: parseInt("041E42", 16) }] })
     });
-    const data = await res.json();
-    if (data.access_token) { saveSpotifyTokens(data); return data.access_token; }
-  } catch (e) { console.error("Spotify refresh failed", e); }
-  return null;
+    return res.ok;
+  } catch (e) { console.error("Discord send failed", e); return false; }
 }
-function spotifyDisconnect() {
-  ["spotify_access_token","spotify_refresh_token","spotify_expires_at","spotify_code_verifier","spotify_state"].forEach(k => localStorage.removeItem(k));
-  if (nowPlayingInterval) clearInterval(nowPlayingInterval);
-  renderNowPlaying();
+async function testDiscordWebhook() {
+  const url = document.getElementById("discordWebhookInput").value.trim();
+  if (!url) { alert("Paste your webhook URL first."); return; }
+  localStorage.setItem("discordWebhook", url);
+  const status = document.getElementById("discordStatus");
+  status.textContent = "Sending…";
+  const ok = await sendDiscordMessage({ title: "✅ Test message", description: "Your PSU Schedule app is connected! You'll get pinged before classes and due dates." });
+  status.textContent = ok ? "✓ Sent! Check Discord." : "✗ Failed — double-check the webhook URL.";
 }
-async function handleSpotifyCallback() {
-  const params = new URLSearchParams(window.location.search);
-  const code = params.get("code");
-  const state = params.get("state");
-  if (!code) return;
-  const savedState = localStorage.getItem("spotify_state");
-  window.history.replaceState({}, document.title, window.location.pathname);
-  if (state !== savedState) return;
-  const verifier = localStorage.getItem("spotify_code_verifier");
-  try {
-    const res = await fetch("https://accounts.spotify.com/api/token", {
-      method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({ client_id: SPOTIFY_CLIENT_ID, grant_type: "authorization_code", code, redirect_uri: SPOTIFY_REDIRECT_URI, code_verifier: verifier })
-    });
-    const data = await res.json();
-    if (data.access_token) saveSpotifyTokens(data);
-  } catch (e) { console.error("Spotify auth failed", e); }
-}
-async function fetchNowPlaying() {
-  if (!spotifyIsConnected()) return null;
-  const token = await spotifyGetValidToken();
-  if (!token) return null;
-  try {
-    const res = await fetch("https://api.spotify.com/v1/me/player/currently-playing", { headers: { Authorization: "Bearer " + token } });
-    if (res.status === 204 || res.status === 202) return { playing: false };
-    if (!res.ok) return null;
-    const data = await res.json();
-    if (!data || !data.item) return { playing: false };
-    const images = (data.item.album && data.item.album.images) || [];
-    const art = images.length ? images[images.length - 1].url : null;
-    return { playing: !!data.is_playing, track: data.item.name, artist: (data.item.artists || []).map(a => a.name).join(", "), art };
-  } catch (e) { console.error(e); return null; }
-}
-async function renderNowPlaying() {
-  const box = document.getElementById("nowPlayingBar");
-  if (!spotifyIsConnected()) {
-    box.innerHTML = `
-      <button class="spotify-connect-btn" onclick="spotifyLogin()">🎧 Connect Spotify</button>
-      <div class="spotify-setup-hint">
-        Getting a "redirect_uri" error? Save this exact address in your Spotify app's Redirect URIs (tap box, then copy):
-        <input class="redirect-uri-box" type="text" readonly value="${SPOTIFY_REDIRECT_URI}" onclick="this.select()">
-      </div>`;
-    return;
+async function checkDiscordNotifications() {
+  const webhook = localStorage.getItem("discordWebhook");
+  if (!webhook) return;
+  const leadMin = parseInt(localStorage.getItem("discordLeadMinutes") || "15", 10);
+  const now = new Date();
+  const dateKey = now.toISOString().slice(0,10);
+  const nowMin = now.getHours()*60 + now.getMinutes();
+  const dayName = DAYS[(now.getDay()+6)%7];
+  const notifiedLog = loadNotifiedLog();
+  let changed = false;
+
+  const todayEvents = allItems.filter(e => e.days.includes(dayName));
+  for (const e of todayEvents) {
+    const diff = toMinutes(e.start) - nowMin;
+    const key = `${dateKey}_${e.id}_class`;
+    if (diff <= leadMin && diff >= 0 && !notifiedLog[key]) {
+      await sendDiscordMessage({ title: "📚 Class starting soon", description: `**${e.name}** starts in ${diff} min\n📍 ${e.building}${e.room ? " " + e.room : ""}` });
+      notifiedLog[key] = true; changed = true;
+    }
   }
-  const info = await fetchNowPlaying();
-  if (!info || !info.playing) {
-    box.innerHTML = `<div class="spotify-idle">🎧 Nothing playing right now <button class="spotify-disconnect" onclick="spotifyDisconnect()">Disconnect</button></div>`;
-    return;
+
+  const assignments = loadAssignments().filter(a => !a.completed);
+  for (const a of assignments) {
+    const diffH = (new Date(a.dueDate) - now) / 3600000;
+    const key = `${dateKey}_${a.id}_due24`;
+    if (diffH <= 24 && diffH > 0 && !notifiedLog[key]) {
+      await sendDiscordMessage({ title: "📝 Assignment due soon", description: `**${a.title}**${a.course ? " (" + a.course + ")" : ""} is due in ${dueCountdownText(a.dueDate).replace("Due in ","")}` });
+      notifiedLog[key] = true; changed = true;
+    }
   }
-  box.innerHTML = `
-    <div class="spotify-now-playing">
-      ${info.art ? `<img class="spotify-art" src="${info.art}" alt="">` : `<div class="spotify-art spotify-art-fallback">🎵</div>`}
-      <div class="spotify-track-info">
-        <div class="spotify-track-name">${info.track}</div>
-        <div class="spotify-artist-name">${info.artist}</div>
-      </div>
-      <button class="spotify-disconnect" onclick="spotifyDisconnect()" aria-label="Disconnect Spotify">✕</button>
-    </div>`;
-}
-function startNowPlayingPolling() {
-  if (nowPlayingInterval) clearInterval(nowPlayingInterval);
-  nowPlayingInterval = setInterval(renderNowPlaying, 15000);
+  if (changed) saveNotifiedLog(notifiedLog);
 }
 
 // ---------- status icon (walker / class) ----------
@@ -1343,14 +1443,17 @@ function confirmScan() {
 // ---------- init ----------
 document.getElementById("themeToggle").textContent = (document.documentElement.getAttribute("data-theme") === "dark") ? "☀️" : "🌙";
 document.getElementById("homeLabel").textContent = loadHome().name;
+document.getElementById("workoutDate").value = new Date().toISOString().slice(0,10);
 renderWeek();
 renderNowBanner();
 renderWeather();
 renderFootball();
 renderAssignments();
 renderGpaCalculator();
+renderWorkouts();
+loadDiscordSettingsIntoUI();
 ensureCoordsForAllItems();
-setInterval(() => { renderNowBanner(); renderFootball(); renderAssignments(); }, 60000);
+setInterval(() => { renderNowBanner(); renderFootball(); renderAssignments(); checkDiscordNotifications(); }, 60000);
 setInterval(renderWeather, 20*60*1000);
 
 (async function initSpotify() {
