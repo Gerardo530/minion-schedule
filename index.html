@@ -186,12 +186,6 @@
   .assign-form input, .assign-form select { width: 100%; padding: 9px; margin-top: 4px; border: 1.5px solid var(--border-light); border-radius: 8px; font-size: 0.9em; background: var(--input-bg); color: var(--text-main); }
   .assign-form button { width: 100%; margin-top: 14px; background: var(--red); color: white; border: none; padding: 12px; border-radius: 10px; font-weight: 700; cursor: pointer; }
 
-  #reminder-section { background: var(--surface); border-radius: 14px; padding: 18px; margin-top: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-top: 4px solid #5865F2; }
-  #reminder-section h2 { margin-top: 0; color: var(--heading-color); font-size: 1.05em; display: flex; align-items: center; gap: 6px; }
-  .reminder-toggle { display: flex; align-items: center; gap: 8px; font-size: 0.88em; font-weight: 600; color: var(--text-main); margin-top: 12px; }
-  #reminder-section select { width: 100%; padding: 9px; margin-top: 6px; border: 1.5px solid var(--border-light); border-radius: 8px; font-size: 0.9em; background: var(--input-bg); color: var(--text-main); }
-  #reminder-section label:not(.reminder-toggle) { display: block; font-size: 0.8em; font-weight: 700; color: var(--text-main); margin-top: 14px; }
-
   #scan-section { background: var(--surface); border-radius: 14px; padding: 18px; margin-top: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-top: 4px solid var(--psu-blue-light); }
   #scan-section h2 { margin-top: 0; color: var(--heading-color); font-size: 1.05em; display: flex; align-items: center; gap: 6px; }
   .scan-desc { font-size: 0.85em; color: var(--text-secondary); line-height: 1.45; margin: 6px 0 12px 0; }
@@ -223,25 +217,29 @@
   .gpa-result-row b { font-size: 1.3em; color: var(--heading-color); }
   .gpa-result-sub { font-size: 0.76em; color: var(--text-secondary); margin-top: 4px; }
 
-  #gym-section { background: var(--surface); border-radius: 14px; padding: 18px; margin-top: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-top: 4px solid var(--purple); }
-  #gym-section h2 { margin-top: 0; color: var(--heading-color); font-size: 1.05em; display: flex; align-items: center; gap: 6px; }
-  .gym-streak-banner { background: linear-gradient(135deg, var(--purple), #5a4680); color: white; border-radius: 10px; padding: 10px 14px; font-weight: 800; font-size: 0.95em; margin-bottom: 14px; text-align: center; }
-  .gym-cal-header { font-weight: 700; color: var(--heading-color); font-size: 0.9em; text-align: center; margin-bottom: 8px; }
-  .gym-cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 16px; }
-  .gym-cal-dow { text-align: center; font-size: 0.7em; font-weight: 700; color: var(--text-muted); padding-bottom: 4px; }
-  .gym-cal-cell { aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.75em; border-radius: 8px; background: var(--surface-alt); color: var(--text-secondary); position: relative; }
-  .gym-cal-cell.empty { background: none; }
-  .gym-cal-cell.has-workout { background: var(--card-club-bg); color: var(--heading-color); font-weight: 700; }
-  .gym-cal-cell.today { border: 2px solid var(--purple); }
-  .gym-dot { font-size: 0.9em; line-height: 1; margin-top: 1px; }
-  .gym-form label { display: block; font-size: 0.8em; font-weight: 700; color: var(--text-main); margin-top: 10px; }
-  .gym-form input, .gym-form select { width: 100%; padding: 9px; margin-top: 4px; border: 1.5px solid var(--border-light); border-radius: 8px; font-size: 0.9em; background: var(--input-bg); color: var(--text-main); }
-  .gym-form button { width: 100%; margin-top: 14px; background: var(--purple); color: white; border: none; padding: 12px; border-radius: 10px; font-weight: 700; cursor: pointer; }
-  .gym-form button.success-flash { background: var(--green); animation: checkPop 0.35s ease; }
-  .gym-history-item { background: var(--surface-alt); border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; font-size: 0.85em; position: relative; }
-  .gym-history-item b { color: var(--text-main); }
-  .gym-notes { font-size: 0.85em; color: var(--text-secondary); margin-top: 3px; }
-  .gym-history-item button { position: absolute; top: 8px; right: 10px; background: none; border: none; color: var(--red); cursor: pointer; font-size: 0.85em; }
+  #workout-section { background: var(--surface); border-radius: 14px; padding: 18px; margin-top: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-top: 4px solid var(--purple); }
+  #workout-section h2 { margin-top: 0; color: var(--heading-color); font-size: 1.05em; display: flex; align-items: center; gap: 6px; }
+  .wk-summary { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
+  .wk-streak { font-size: 1em; font-weight: 800; color: var(--heading-color); }
+  .wk-week-strip { display: flex; gap: 5px; }
+  .wk-day { width: 26px; height: 26px; border-radius: 50%; background: var(--surface-alt); color: var(--text-muted); font-size: 0.7em; font-weight: 700; display: flex; align-items: center; justify-content: center; border: 1.5px solid var(--border-light); }
+  .wk-day.active { background: var(--purple); color: white; border-color: var(--purple); }
+  .wk-goal-bar { margin-bottom: 14px; }
+  .wk-goal-label { font-size: 0.8em; color: var(--text-secondary); margin-bottom: 5px; font-weight: 600; }
+  .wk-edit-goal { cursor: pointer; color: var(--psu-blue-light); font-weight: 700; margin-left: 6px; }
+  .wk-goal-track { height: 8px; background: var(--surface-alt); border-radius: 6px; overflow: hidden; }
+  .wk-goal-fill { height: 100%; background: var(--purple); border-radius: 6px; transition: width 0.4s ease; }
+  .workout-card { background: var(--surface-alt); border-left: 5px solid var(--purple); border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; }
+  .workout-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .workout-type { font-weight: 700; color: var(--text-main); font-size: 0.92em; }
+  .workout-date { font-size: 0.78em; color: var(--text-secondary); margin-top: 2px; }
+  .workout-notes { font-size: 0.82em; color: var(--text-secondary); margin-top: 6px; font-style: italic; }
+  .wk-del { background: none; border: none; color: var(--red); font-size: 0.95em; cursor: pointer; }
+
+  #discord-section { background: var(--surface); border-radius: 14px; padding: 18px; margin-top: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-top: 4px solid #5865F2; }
+  #discord-section h2 { margin-top: 0; color: var(--heading-color); font-size: 1.05em; display: flex; align-items: center; gap: 6px; }
+  #discord-section label { display: block; font-size: 0.8em; font-weight: 700; color: var(--text-main); margin-top: 10px; }
+  #discord-section input { width: 100%; padding: 9px; margin-top: 4px; border: 1.5px solid var(--border-light); border-radius: 8px; font-size: 0.88em; background: var(--input-bg); color: var(--text-main); box-sizing: border-box; }
 
   #add-form { background: var(--surface); border-radius: 14px; padding: 18px; margin-top: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-top: 4px solid var(--accent-gold); }
   #add-form h2 { margin-top: 0; color: var(--heading-color); font-size: 1.05em; display: flex; align-items: center; gap: 6px; }
@@ -318,22 +316,6 @@
     </div>
   </div>
 
-  <div id="reminder-section">
-    <h2>🔔 Class Reminders (Discord)</h2>
-    <p class="scan-desc">Pings a Discord channel shortly before each class — but only while this app is open in a tab or your home-screen PWA. It can't notify you if it's fully closed; that needs a real always-on server, which this static site doesn't have.</p>
-    <label class="reminder-toggle"><input type="checkbox" id="reminderEnabled" onchange="toggleReminders(this.checked)"> Enable reminders</label>
-    <label>Minutes before class</label>
-    <select id="reminderMinutes" onchange="updateReminderMinutes(this.value)">
-      <option value="5">5 minutes</option>
-      <option value="10">10 minutes</option>
-      <option value="15" selected>15 minutes</option>
-      <option value="20">20 minutes</option>
-      <option value="30">30 minutes</option>
-    </select>
-    <label class="reminder-toggle"><input type="checkbox" id="browserNotifyToggle" onchange="toggleBrowserNotify(this.checked)"> Also try a phone/browser notification (works best on Android/desktop, unreliable on iPhone)</label>
-    <div id="reminderStatus" class="scan-status"></div>
-  </div>
-
   <div id="scan-section">
     <h2>📷 Scan Your Schedule</h2>
     <p class="scan-desc">Photograph your weekly schedule grid (like the LionPATH view, with Mon–Fri visible across the top). This reads it on your device — nothing is uploaded anywhere — and lets you review before anything is added.</p>
@@ -359,25 +341,42 @@
     <div id="gpaResult" class="gpa-result"></div>
   </div>
 
-  <div id="gym-section">
-    <h2>🏋️ Gym Tracker</h2>
-    <div id="gymStreak" class="gym-streak-banner"></div>
-    <div id="gymCalendar"></div>
-    <div class="gym-form">
+  <div id="workout-section">
+    <h2>🏋️ Workout Tracker</h2>
+    <div class="wk-summary">
+      <div id="workoutStreak" class="wk-streak"></div>
+      <div id="workoutWeekStrip" class="wk-week-strip"></div>
+    </div>
+    <div id="workoutGoalBar" class="wk-goal-bar"></div>
+    <div id="workoutHistory"></div>
+    <div class="assign-form">
       <label>Date</label>
       <input type="date" id="workoutDate">
       <label>Type</label>
       <select id="workoutType">
-        <option>Push</option><option>Pull</option><option>Legs</option><option>Full Body</option><option>Cardio</option><option>Sports Practice</option><option>Other</option>
+        <option>Push</option><option>Pull</option><option>Legs</option><option>Upper Body</option>
+        <option>Lower Body</option><option>Full Body</option><option>Cardio</option><option>Other</option>
       </select>
       <label>Duration (minutes, optional)</label>
       <input type="number" id="workoutDuration" min="1" placeholder="e.g. 60">
       <label>Notes (optional)</label>
-      <input type="text" id="workoutNotes" placeholder="e.g. new PR on bench">
-      <button id="logWorkoutBtn" onclick="logWorkout()">+ Log Workout</button>
+      <input type="text" id="workoutNotes" placeholder="e.g. bench 135x8, squat 185x5">
+      <button onclick="addWorkout()">+ Log Workout</button>
     </div>
-    <div class="modal-section-label" style="margin-top:18px;">Recent</div>
-    <div id="gymHistory"></div>
+  </div>
+
+  <div id="discord-section">
+    <h2>💬 Discord Notifications</h2>
+    <p class="scan-desc">Get pinged before class starts or when something's due. Your webhook URL saves only in this browser's storage — never in the code you commit, since your repo is public. Don't paste it into the GitHub file itself.</p>
+    <label>Webhook URL</label>
+    <input type="text" id="discordWebhookInput" placeholder="https://discord.com/api/webhooks/...">
+    <label>Remind me before class (minutes)</label>
+    <input type="number" id="discordLeadInput" min="1" max="60" value="15">
+    <div class="scan-btn-row" style="margin-top:12px;">
+      <button class="scan-btn" onclick="saveDiscordSettings()">💾 Save</button>
+      <button class="scan-btn" onclick="testDiscordWebhook()">🔔 Send Test</button>
+    </div>
+    <div id="discordStatus" class="scan-status"></div>
   </div>
 
   <div id="add-form">
@@ -457,11 +456,6 @@ let currentBannerItemId = null;
 let ocrWorker = null;
 let reviewCandidates = [];
 
-function dateKey(d) {
-  const yyyy = d.getFullYear(); const mm = String(d.getMonth()+1).padStart(2,"0"); const dd = String(d.getDate()).padStart(2,"0");
-  return `${yyyy}-${mm}-${dd}`;
-}
-
 // ---------- hard reset ----------
 function hardReset() {
   window.location.href = window.location.origin + window.location.pathname;
@@ -499,10 +493,10 @@ function loadGpaBaseline() { return JSON.parse(localStorage.getItem("gpaBaseline
 function saveGpaBaseline(b) { localStorage.setItem("gpaBaseline", JSON.stringify(b)); }
 function loadWorkouts() { return JSON.parse(localStorage.getItem("workouts") || "[]"); }
 function saveWorkouts(list) { localStorage.setItem("workouts", JSON.stringify(list)); }
-function loadReminderSettings() { return JSON.parse(localStorage.getItem("reminderSettings") || '{"enabled":false,"minutesBefore":15,"browserNotify":false}'); }
-function saveReminderSettings(s) { localStorage.setItem("reminderSettings", JSON.stringify(s)); }
-function loadNotifiedLog() { return JSON.parse(localStorage.getItem("notifiedLog") || "{}"); }
-function saveNotifiedLog(l) { localStorage.setItem("notifiedLog", JSON.stringify(l)); }
+function loadWorkoutGoal() { return parseInt(localStorage.getItem("workoutGoal") || "4", 10); }
+function saveWorkoutGoal(n) { localStorage.setItem("workoutGoal", String(n)); }
+function loadNotifiedLog() { return JSON.parse(localStorage.getItem("discordNotified") || "{}"); }
+function saveNotifiedLog(log) { localStorage.setItem("discordNotified", JSON.stringify(log)); }
 
 function toMinutes(t) { const [h,m] = t.split(":").map(Number); return h*60+m; }
 function directionsUrl(building) {
@@ -866,134 +860,6 @@ function renderGpaCalculator() {
   renderGpaResult();
 }
 
-// ---------- gym tracker ----------
-function computeStreak(workouts) {
-  const daysWithWorkout = new Set(workouts.map(w => w.date));
-  let streak = 0;
-  let cursor = new Date();
-  if (!daysWithWorkout.has(dateKey(cursor))) cursor.setDate(cursor.getDate() - 1);
-  while (daysWithWorkout.has(dateKey(cursor))) { streak++; cursor.setDate(cursor.getDate() - 1); }
-  return streak;
-}
-function renderGymCalendar() {
-  const workouts = loadWorkouts();
-  const daysWithWorkout = {};
-  workouts.forEach(w => { daysWithWorkout[w.date] = (daysWithWorkout[w.date]||[]).concat(w); });
-  const now = new Date();
-  const year = now.getFullYear(), month = now.getMonth();
-  const firstDay = new Date(year, month, 1);
-  const lastDay = new Date(year, month + 1, 0);
-  const startWeekday = firstDay.getDay();
-  const totalDays = lastDay.getDate();
-  let html = `<div class="gym-cal-header">${firstDay.toLocaleDateString("en-US",{month:"long",year:"numeric"})}</div><div class="gym-cal-grid">`;
-  ["S","M","T","W","T","F","S"].forEach(d => html += `<div class="gym-cal-dow">${d}</div>`);
-  for (let i=0; i<startWeekday; i++) html += `<div class="gym-cal-cell empty"></div>`;
-  for (let day=1; day<=totalDays; day++) {
-    const cellDate = new Date(year, month, day);
-    const key = dateKey(cellDate);
-    const hasWorkout = !!daysWithWorkout[key];
-    const isToday = key === dateKey(now);
-    html += `<div class="gym-cal-cell ${hasWorkout?'has-workout':''} ${isToday?'today':''}">${day}${hasWorkout ? '<span class="gym-dot">🔥</span>' : ''}</div>`;
-  }
-  html += `</div>`;
-  document.getElementById("gymCalendar").innerHTML = html;
-}
-function logWorkout() {
-  const date = document.getElementById("workoutDate").value || dateKey(new Date());
-  const type = document.getElementById("workoutType").value;
-  const duration = document.getElementById("workoutDuration").value;
-  const notes = document.getElementById("workoutNotes").value.trim();
-  const list = loadWorkouts();
-  list.push({ id: "workout-"+Date.now()+"-"+Math.random().toString(36).slice(2,5), date, type, duration: duration ? parseInt(duration,10) : null, notes });
-  saveWorkouts(list);
-  document.getElementById("workoutNotes").value = "";
-  document.getElementById("workoutDuration").value = "";
-  renderGymSection();
-  const btn = document.getElementById("logWorkoutBtn");
-  const orig = btn.textContent; btn.textContent = "✓ Logged!"; btn.classList.add("success-flash");
-  setTimeout(()=>{btn.textContent=orig; btn.classList.remove("success-flash");}, 1300);
-}
-function deleteWorkout(id) {
-  saveWorkouts(loadWorkouts().filter(w => w.id !== id));
-  renderGymSection();
-}
-function renderGymSection() {
-  renderGymCalendar();
-  const workouts = loadWorkouts().sort((a,b) => b.date.localeCompare(a.date));
-  const streak = computeStreak(workouts);
-  document.getElementById("gymStreak").innerHTML = streak > 0 ? `🔥 ${streak} day streak!` : `Log a workout to start your streak`;
-  const recent = workouts.slice(0, 8);
-  const box = document.getElementById("gymHistory");
-  if (recent.length === 0) box.innerHTML = `<div class="empty-day">No workouts logged yet</div>`;
-  else box.innerHTML = recent.map(w => {
-    const d = new Date(w.date + "T12:00:00");
-    return `<div class="gym-history-item">
-      <div><b>${w.type}</b> · ${d.toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"})}${w.duration ? " · " + w.duration + " min" : ""}</div>
-      ${w.notes ? `<div class="gym-notes">${w.notes}</div>` : ""}
-      <button onclick="deleteWorkout('${w.id}')">✕</button>
-    </div>`;
-  }).join("");
-}
-
-// ---------- Discord class reminders ----------
-const DISCORD_WEBHOOK_URL = "PASTE_YOUR_DISCORD_WEBHOOK_URL_HERE";
-
-async function sendDiscordReminder(event, minutesBefore) {
-  if (!DISCORD_WEBHOOK_URL || DISCORD_WEBHOOK_URL === "PASTE_YOUR_DISCORD_WEBHOOK_URL_HERE") return;
-  try {
-    await fetch(DISCORD_WEBHOOK_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ content: `⏰ **${event.name}** starts in ${minutesBefore} min — ${event.building}${event.room ? " " + event.room : ""}` })
-    });
-  } catch (e) { console.error("Discord webhook failed", e); }
-}
-function checkClassReminders() {
-  const settings = loadReminderSettings();
-  if (!settings.enabled) return;
-  const now = new Date();
-  const dayName = DAYS[(now.getDay() + 6) % 7];
-  const nowMin = now.getHours()*60 + now.getMinutes();
-  const todayKey = dateKey(now);
-  const log = loadNotifiedLog();
-  if (!log[todayKey]) log[todayKey] = [];
-
-  allItems.filter(e => e.days.includes(dayName)).forEach(e => {
-    const minsUntil = toMinutes(e.start) - nowMin;
-    if (minsUntil >= 0 && minsUntil <= settings.minutesBefore && minsUntil >= settings.minutesBefore - 4 && !log[todayKey].includes(e.id)) {
-      sendDiscordReminder(e, settings.minutesBefore);
-      if (settings.browserNotify && "Notification" in window && Notification.permission === "granted") {
-        new Notification(`⏰ ${e.name} starts in ${settings.minutesBefore} min`, { body: `${e.building}${e.room ? " " + e.room : ""}` });
-      }
-      log[todayKey].push(e.id);
-      saveNotifiedLog(log);
-    }
-  });
-}
-function toggleReminders(enabled) {
-  const s = loadReminderSettings(); s.enabled = enabled; saveReminderSettings(s);
-  if (enabled && DISCORD_WEBHOOK_URL === "https://discord.com/api/webhooks/1532476952240328775/tjHpTeTUPSUQfpG0xdp4O98o5li1h-_UWbp15MJqvtFlD6BdbWWWZMwoDtf01PS1ZrS7") {
-    alert("Add your Discord webhook URL to DISCORD_WEBHOOK_URL near the top of the script first.");
-  }
-  renderReminderStatus();
-}
-function updateReminderMinutes(val) {
-  const s = loadReminderSettings(); s.minutesBefore = parseInt(val,10); saveReminderSettings(s);
-  renderReminderStatus();
-}
-function toggleBrowserNotify(checked) {
-  const s = loadReminderSettings(); s.browserNotify = checked; saveReminderSettings(s);
-  if (checked && "Notification" in window && Notification.permission === "default") Notification.requestPermission();
-  renderReminderStatus();
-}
-function renderReminderStatus() {
-  const s = loadReminderSettings();
-  document.getElementById("reminderEnabled").checked = s.enabled;
-  document.getElementById("reminderMinutes").value = s.minutesBefore;
-  document.getElementById("browserNotifyToggle").checked = s.browserNotify;
-  document.getElementById("reminderStatus").textContent = s.enabled ? `Watching for classes starting within ${s.minutesBefore} min while this tab is open.` : "";
-}
-
 // ---------- Spotify ----------
 const SPOTIFY_CLIENT_ID = "7e5966abed1f4e66b3a913ab4fe161e2";
 const SPOTIFY_REDIRECT_URI = window.location.origin + window.location.pathname;
@@ -1117,6 +983,163 @@ async function renderNowPlaying() {
 function startNowPlayingPolling() {
   if (nowPlayingInterval) clearInterval(nowPlayingInterval);
   nowPlayingInterval = setInterval(renderNowPlaying, 15000);
+}
+
+// ---------- workout tracker ----------
+function addWorkout() {
+  const date = document.getElementById("workoutDate").value || new Date().toISOString().slice(0,10);
+  const type = document.getElementById("workoutType").value;
+  const duration = parseInt(document.getElementById("workoutDuration").value, 10) || null;
+  const notes = document.getElementById("workoutNotes").value.trim();
+  const list = loadWorkouts();
+  list.push({ id: "wk-" + Date.now() + "-" + Math.random().toString(36).slice(2,5), date, type, duration, notes });
+  saveWorkouts(list);
+  document.getElementById("workoutNotes").value = "";
+  document.getElementById("workoutDuration").value = "";
+  renderWorkouts();
+}
+function deleteWorkout(id) {
+  saveWorkouts(loadWorkouts().filter(w => w.id !== id));
+  renderWorkouts();
+}
+function editWorkoutGoal() {
+  const current = loadWorkoutGoal();
+  const input = prompt("Weekly workout goal:", current);
+  if (input === null) return;
+  const val = parseInt(input, 10);
+  if (!isNaN(val) && val > 0) saveWorkoutGoal(val);
+  renderWorkouts();
+}
+function computeStreak(workouts) {
+  const dates = new Set(workouts.map(w => w.date));
+  let streak = 0;
+  let cursor = new Date();
+  cursor.setHours(0,0,0,0);
+  if (!dates.has(cursor.toISOString().slice(0,10))) cursor.setDate(cursor.getDate() - 1);
+  while (dates.has(cursor.toISOString().slice(0,10))) {
+    streak++;
+    cursor.setDate(cursor.getDate() - 1);
+  }
+  return streak;
+}
+function render7DayStrip(workouts) {
+  const dates = new Set(workouts.map(w => w.date));
+  let html = "";
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const key = d.toISOString().slice(0,10);
+    const label = d.toLocaleDateString("en-US", { weekday: "narrow" });
+    html += `<div class="wk-day ${dates.has(key) ? "active" : ""}" title="${d.toLocaleDateString()}">${label}</div>`;
+  }
+  return html;
+}
+function weeklyCount(workouts) {
+  const now = new Date();
+  const startOfWeek = new Date(now);
+  startOfWeek.setDate(now.getDate() - now.getDay());
+  startOfWeek.setHours(0,0,0,0);
+  return workouts.filter(w => new Date(w.date + "T00:00:00") >= startOfWeek).length;
+}
+function renderWorkouts() {
+  const workouts = loadWorkouts().sort((a,b) => new Date(b.date) - new Date(a.date));
+  const streak = computeStreak(workouts);
+  const weekCount = weeklyCount(workouts);
+  const goal = loadWorkoutGoal();
+  const pct = Math.min(100, Math.round((weekCount / goal) * 100));
+
+  document.getElementById("workoutStreak").innerHTML = `🔥 ${streak} day streak`;
+  document.getElementById("workoutWeekStrip").innerHTML = render7DayStrip(workouts);
+  document.getElementById("workoutGoalBar").innerHTML = `
+    <div class="wk-goal-label">This week: ${weekCount} / ${goal} workouts <span class="wk-edit-goal" onclick="editWorkoutGoal()">✏️ edit goal</span></div>
+    <div class="wk-goal-track"><div class="wk-goal-fill" style="width:${pct}%"></div></div>
+  `;
+
+  const list = document.getElementById("workoutHistory");
+  if (workouts.length === 0) {
+    list.innerHTML = `<div class="empty-day">No workouts logged yet — add your first one below!</div>`;
+  } else {
+    list.innerHTML = workouts.slice(0, 10).map(w => `
+      <div class="workout-card">
+        <div class="workout-top">
+          <div>
+            <div class="workout-type">${w.type}</div>
+            <div class="workout-date">${new Date(w.date + "T00:00:00").toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"})}${w.duration ? " · " + w.duration + " min" : ""}</div>
+          </div>
+          <button class="wk-del" onclick="deleteWorkout('${w.id}')">✕</button>
+        </div>
+        ${w.notes ? `<div class="workout-notes">${w.notes}</div>` : ""}
+      </div>`).join("");
+  }
+}
+
+// ---------- Discord notifications ----------
+function loadDiscordSettingsIntoUI() {
+  document.getElementById("discordWebhookInput").value = localStorage.getItem("discordWebhook") || "";
+  document.getElementById("discordLeadInput").value = localStorage.getItem("discordLeadMinutes") || "15";
+}
+function saveDiscordSettings() {
+  const url = document.getElementById("discordWebhookInput").value.trim();
+  const lead = document.getElementById("discordLeadInput").value;
+  if (url) localStorage.setItem("discordWebhook", url);
+  else localStorage.removeItem("discordWebhook");
+  localStorage.setItem("discordLeadMinutes", lead || "15");
+  const status = document.getElementById("discordStatus");
+  status.textContent = url ? "✓ Saved!" : "Webhook cleared.";
+  setTimeout(() => { status.textContent = ""; }, 2000);
+}
+async function sendDiscordMessage({title, description}) {
+  const webhook = localStorage.getItem("discordWebhook");
+  if (!webhook) return false;
+  try {
+    const res = await fetch(webhook, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username: "PSU Schedule", embeds: [{ title, description, color: parseInt("041E42", 16) }] })
+    });
+    return res.ok;
+  } catch (e) { console.error("Discord send failed", e); return false; }
+}
+async function testDiscordWebhook() {
+  const url = document.getElementById("discordWebhookInput").value.trim();
+  if (!url) { alert("Paste your webhook URL first."); return; }
+  localStorage.setItem("discordWebhook", url);
+  const status = document.getElementById("discordStatus");
+  status.textContent = "Sending…";
+  const ok = await sendDiscordMessage({ title: "✅ Test message", description: "Your PSU Schedule app is connected! You'll get pinged before classes and due dates." });
+  status.textContent = ok ? "✓ Sent! Check Discord." : "✗ Failed — double-check the webhook URL.";
+}
+async function checkDiscordNotifications() {
+  const webhook = localStorage.getItem("discordWebhook");
+  if (!webhook) return;
+  const leadMin = parseInt(localStorage.getItem("discordLeadMinutes") || "15", 10);
+  const now = new Date();
+  const dateKey = now.toISOString().slice(0,10);
+  const nowMin = now.getHours()*60 + now.getMinutes();
+  const dayName = DAYS[(now.getDay()+6)%7];
+  const notifiedLog = loadNotifiedLog();
+  let changed = false;
+
+  const todayEvents = allItems.filter(e => e.days.includes(dayName));
+  for (const e of todayEvents) {
+    const diff = toMinutes(e.start) - nowMin;
+    const key = `${dateKey}_${e.id}_class`;
+    if (diff <= leadMin && diff >= 0 && !notifiedLog[key]) {
+      await sendDiscordMessage({ title: "📚 Class starting soon", description: `**${e.name}** starts in ${diff} min\n📍 ${e.building}${e.room ? " " + e.room : ""}` });
+      notifiedLog[key] = true; changed = true;
+    }
+  }
+
+  const assignments = loadAssignments().filter(a => !a.completed);
+  for (const a of assignments) {
+    const diffH = (new Date(a.dueDate) - now) / 3600000;
+    const key = `${dateKey}_${a.id}_due24`;
+    if (diffH <= 24 && diffH > 0 && !notifiedLog[key]) {
+      await sendDiscordMessage({ title: "📝 Assignment due soon", description: `**${a.title}**${a.course ? " (" + a.course + ")" : ""} is due in ${dueCountdownText(a.dueDate).replace("Due in ","")}` });
+      notifiedLog[key] = true; changed = true;
+    }
+  }
+  if (changed) saveNotifiedLog(notifiedLog);
 }
 
 // ---------- status icon (walker / class) ----------
@@ -1545,17 +1568,17 @@ function confirmScan() {
 // ---------- init ----------
 document.getElementById("themeToggle").textContent = (document.documentElement.getAttribute("data-theme") === "dark") ? "☀️" : "🌙";
 document.getElementById("homeLabel").textContent = loadHome().name;
-document.getElementById("workoutDate").value = dateKey(new Date());
+document.getElementById("workoutDate").value = new Date().toISOString().slice(0,10);
 renderWeek();
 renderNowBanner();
 renderWeather();
 renderFootball();
 renderAssignments();
 renderGpaCalculator();
-renderGymSection();
-renderReminderStatus();
+renderWorkouts();
+loadDiscordSettingsIntoUI();
 ensureCoordsForAllItems();
-setInterval(() => { renderNowBanner(); renderFootball(); renderAssignments(); checkClassReminders(); }, 60000);
+setInterval(() => { renderNowBanner(); renderFootball(); renderAssignments(); checkDiscordNotifications(); }, 60000);
 setInterval(renderWeather, 20*60*1000);
 
 (async function initSpotify() {
