@@ -972,7 +972,7 @@ function checkClassReminders() {
 }
 function toggleReminders(enabled) {
   const s = loadReminderSettings(); s.enabled = enabled; saveReminderSettings(s);
-  if (enabled && DISCORD_WEBHOOK_URL === "PASTE_YOUR_DISCORD_WEBHOOK_URL_HERE") {
+  if (enabled && DISCORD_WEBHOOK_URL === "https://discord.com/api/webhooks/1532476952240328775/tjHpTeTUPSUQfpG0xdp4O98o5li1h-_UWbp15MJqvtFlD6BdbWWWZMwoDtf01PS1ZrS7") {
     alert("Add your Discord webhook URL to DISCORD_WEBHOOK_URL near the top of the script first.");
   }
   renderReminderStatus();
@@ -995,7 +995,7 @@ function renderReminderStatus() {
 }
 
 // ---------- Spotify ----------
-const SPOTIFY_CLIENT_ID = "PASTE_YOUR_SPOTIFY_CLIENT_ID_HERE";
+const SPOTIFY_CLIENT_ID = "7e5966abed1f4e66b3a913ab4fe161e2";
 const SPOTIFY_REDIRECT_URI = window.location.origin + window.location.pathname;
 const SPOTIFY_SCOPES = "user-read-currently-playing user-read-playback-state";
 let nowPlayingInterval = null;
