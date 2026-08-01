@@ -22,6 +22,7 @@
   :root {
     --psu-navy: #041E42; --psu-navy-dark: #020f22; --psu-blue-light: #1e3a5f;
     --psu-white: #ffffff; --accent-gold: #d9a441; --green: #4a7a5e; --purple: #7a5ea8; --red: #b00020;
+    --teal: #1f8a7a; --teal-light: #e6f7f4;
     --bg: #eef1f4; --surface: #ffffff; --surface-alt: #f4f6f8; --surface-alt2: #f8f7fb; --input-bg: #fafbfc;
     --border-light: #d5d9de; --border-light2: #e2ddec;
     --text-main: #1a1a1a; --text-secondary: #555; --text-muted: #99a;
@@ -35,6 +36,7 @@
     --border-light: #2b3b56; --border-light2: #362f4d;
     --text-main: #eef1f6; --text-secondary: #a9b4c4; --text-muted: #7c8aa0;
     --heading-color: #a9c9f2; --warn-color: #e5b464; --now-border: #3f6fae;
+    --teal: #3fc2ae; --teal-light: #12332e;
     --card-waitlist-bg: #392f18; --card-club-bg: #1a2740; --card-scanned-bg: #281f3a;
     --modal-overlay-bg: rgba(0,0,0,0.72);
     color-scheme: dark;
@@ -47,6 +49,7 @@
   @keyframes livePulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.35; transform: scale(1.6); } }
   @keyframes checkPop { 0% { transform: scale(0.85); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
   @keyframes stripeShift { from { background-position: 0 0; } to { background-position: -40px 0; } }
+  @keyframes orbitDrift { 0% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(3px,-3px) rotate(8deg); } 100% { transform: translate(0,0) rotate(0deg); } }
 
   .hard-reset-btn { position: fixed; bottom: 18px; right: 18px; z-index: 500; width: 50px; height: 50px; border-radius: 50%; border: none; background: var(--psu-navy); color: white; font-size: 1.3em; box-shadow: 0 3px 10px rgba(0,0,0,0.35); cursor: pointer; display: flex; align-items: center; justify-content: center; }
   .hard-reset-btn:active { transform: scale(0.9); }
@@ -162,6 +165,19 @@
   .empty-day { color: var(--text-muted); font-style: italic; font-size: 0.88em; }
   .remove-btn { color: var(--red); cursor: pointer; font-size: 0.78em; background: none; border: none; margin-top: 6px; font-weight: 600; padding: 0; }
   .remove-btn:active { opacity: 0.5; }
+
+  /* ---- Virtual / async classes section ---- */
+  #virtual-section { background: linear-gradient(160deg, var(--teal-light) 0%, var(--surface) 55%); border-radius: 14px; padding: 16px 16px 6px 16px; margin-bottom: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border: 1.5px dashed var(--teal); animation: fadeSlideUp 0.45s ease-out both; }
+  .virtual-section-title { font-weight: 800; color: var(--heading-color); margin-bottom: 3px; font-size: 1.05em; display: flex; align-items: center; gap: 7px; }
+  .virtual-section-sub { font-size: 0.78em; color: var(--text-secondary); margin-bottom: 12px; line-height: 1.4; }
+  .virtual-orb { display: inline-block; animation: orbitDrift 3s ease-in-out infinite; }
+  .virtual-card { position: relative; background: var(--surface); border: 1.5px solid var(--teal); border-radius: 12px; padding: 13px 15px; margin-bottom: 10px; cursor: pointer; overflow: hidden; transition: transform 0.15s ease; animation: fadeIn 0.35s ease both; }
+  .virtual-card:active { transform: scale(0.97); }
+  .virtual-card::before { content: ""; position: absolute; top: 0; left: 0; bottom: 0; width: 5px; background: repeating-linear-gradient(180deg, var(--teal) 0 8px, transparent 8px 16px); }
+  .virtual-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--teal); color: white; font-size: 0.68em; font-weight: 700; letter-spacing: 0.3px; padding: 3px 10px; border-radius: 20px; margin-bottom: 7px; margin-left: 4px; }
+  .virtual-name { font-weight: 700; color: var(--text-main); font-size: 1em; margin-left: 4px; }
+  .virtual-meta { font-size: 0.85em; color: var(--text-secondary); margin-top: 3px; margin-left: 4px; line-height: 1.4; }
+  .virtual-desc { font-size: 0.82em; color: var(--text-secondary); margin-top: 7px; margin-left: 4px; line-height: 1.45; }
 
   #assignments-section { background: var(--surface); border-radius: 14px; padding: 18px; margin-top: 26px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-top: 4px solid var(--red); }
   #assignments-section h2 { margin-top: 0; color: var(--heading-color); font-size: 1.05em; display: flex; align-items: center; gap: 6px; }
@@ -296,6 +312,12 @@
   <div id="now-banner" onclick="openBannerModal()"></div>
   <div class="paw-divider">🐾 🐾 🐾 🐾 🐾</div>
   <div id="week-container"></div>
+
+  <div id="virtual-section" style="display:none;">
+    <div class="virtual-section-title"><span class="virtual-orb">💻</span> Online / Async Classes</div>
+    <div class="virtual-section-sub">No fixed weekly meeting time on your schedule grid — work through these on your own pace.</div>
+    <div id="virtualClassesList"></div>
+  </div>
 
   <div id="assignments-section">
     <h2>📝 Assignments & Exams</h2>
@@ -1167,7 +1189,7 @@ function renderWeek() {
   container.innerHTML = "";
 
   DAYS.forEach(day => {
-    const dayEvents = allItems.filter(e => e.days.includes(day)).sort((a,b) => toMinutes(a.start) - toMinutes(b.start));
+    const dayEvents = allItems.filter(e => e.days && e.days.includes(day)).sort((a,b) => toMinutes(a.start) - toMinutes(b.start));
     const block = document.createElement("div");
     block.className = "day-block";
     let html = `<div class="day-title">${day}</div>`;
@@ -1202,15 +1224,37 @@ function renderWeek() {
     block.innerHTML = html;
     container.appendChild(block);
   });
+
+  renderVirtualClasses();
+}
+
+function renderVirtualClasses() {
+  const virtualItems = allItems.filter(e => !e.days || e.days.length === 0);
+  const section = document.getElementById("virtual-section");
+  const list = document.getElementById("virtualClassesList");
+  if (virtualItems.length === 0) {
+    section.style.display = "none";
+    list.innerHTML = "";
+    return;
+  }
+  section.style.display = "block";
+  list.innerHTML = virtualItems.map(e => `
+    <div class="virtual-card" data-id="${e.id}" onclick="openModal('${e.id}')">
+      <div class="virtual-badge">🌐 No fixed meeting time</div>
+      <div class="virtual-name">${e.name}</div>
+      <div class="virtual-meta">${e.type ? e.type : "Online / Asynchronous"}${e.building && e.building !== "Online / Asynchronous" ? " · " + e.building : ""}</div>
+      ${e.description ? `<div class="virtual-desc">${e.description}</div>` : ""}
+      <div class="tap-hint">Tap for details ›</div>
+    </div>`).join("");
 }
 
 function renderNowBanner() {
   const now = new Date();
   const dayName = DAYS[(now.getDay() + 6) % 7];
   const nowMin = now.getHours()*60 + now.getMinutes();
-  const todayEvents = allItems.filter(e => e.days.includes(dayName)).sort((a,b) => toMinutes(a.start) - toMinutes(b.start));
-  const current = todayEvents.find(e => nowMin >= toMinutes(e.start) && nowMin < toMinutes(e.end));
-  const next = todayEvents.find(e => toMinutes(e.start) > nowMin);
+  const todayEventsList = allItems.filter(e => e.days && e.days.includes(dayName)).sort((a,b) => toMinutes(a.start) - toMinutes(b.start));
+  const current = todayEventsList.find(e => nowMin >= toMinutes(e.start) && nowMin < toMinutes(e.end));
+  const next = todayEventsList.find(e => toMinutes(e.start) > nowMin);
   const banner = document.getElementById("now-banner");
 
   if (current) {
@@ -1246,12 +1290,13 @@ function openModal(id) {
   if (!item) return;
   const details = loadClassDetails()[id] || {};
   const isClub = !!item.isClub;
-  const daysStr = item.days.join(", ");
+  const isVirtual = !item.days || item.days.length === 0;
+  const daysStr = isVirtual ? "Online / Async — no fixed time" : item.days.join(", ");
 
   let html = `
-    <div class="modal-title">${item.name}${item.waitlist ? " ⚠️" : ""}</div>
-    <div class="modal-meta">${item.type ? item.type + " · " : ""}${daysStr} · ${formatTime(item.start)}–${formatTime(item.end)}<br>${item.building}${item.room ? " " + item.room : ""}</div>
-    <a class="directions-link" target="_blank" href="${directionsUrl(item.building)}" onclick="event.stopPropagation()">📍 Directions</a>
+    <div class="modal-title">${item.name}${item.waitlist ? " ⚠️" : ""}${isVirtual ? " 💻" : ""}</div>
+    <div class="modal-meta">${item.type ? item.type + " · " : ""}${daysStr}${isVirtual ? "" : " · " + formatTime(item.start) + "–" + formatTime(item.end)}<br>${item.building}${item.room ? " " + item.room : ""}</div>
+    ${isVirtual ? "" : `<a class="directions-link" target="_blank" href="${directionsUrl(item.building)}" onclick="event.stopPropagation()">📍 Directions</a>`}
   `;
   if (item.description) html += `<div class="modal-section-label">Description</div><div class="modal-description">${item.description}</div>`;
   html += `
